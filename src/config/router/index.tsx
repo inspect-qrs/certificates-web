@@ -11,10 +11,6 @@ const authRequiredRoutes: RouteObject[] = [
     index: true,
     path: 'dashboard',
     element: <Dashboard />
-  },
-  {
-    path: 'certificate',
-    element: <CertificateDetail />
   }
 ]
 
@@ -31,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: '*',
     element: <NotFoundView />
+  },
+  {
+    path: 'certificate',
+    element: <CertificateDetail />
   }
 ])
 

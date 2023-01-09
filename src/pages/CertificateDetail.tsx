@@ -46,8 +46,8 @@ const CertificateDetail = (): ReactElement => {
             <div className='min-h-screen sm:h-screen p-3'>
               <div className=' h-full p-6 px-24 flex flex-col justify-between gap-5 sm:gap-0'>
                 <div className='flex justify-between'>
-                  <img src="./src/assets/logo.png" alt="" className='h-auto sm:h-[150px] w-auto' />
-                  <img src="./src/assets/escudo.png" alt="" className='h-auto sm:h-[150px] w-auto' />
+                  <img src="/logo.png" alt="logo" className='h-auto sm:h-[150px] w-auto' />
+                  <img src="/escudo.png" alt="escudo" className='h-auto sm:h-[150px] w-auto' />
                 </div>
                 <div className='flex flex-col items-center justify-center gap-2 h-[75%] text-xl'>
                   <h1 className='font-bold uppercase text-6xl'>Certificado</h1>
@@ -62,7 +62,7 @@ const CertificateDetail = (): ReactElement => {
                 </div>
 
                 <div className='flex flex-col items-center gap-4 sm:gap-0 sm:flex-row sm:justify-between'>
-                  <img className='' src="./src/assets/brand.png" alt="" />
+                  <img className='' src="/brand.png" alt="brand" />
                   <p className='text-center'>Av. República de Panamá 4575 Ofic. 803-804. Lima 34 - Perú</p>
                   <div className='w-auto max-w-[120px]'>
                     <QRCode
