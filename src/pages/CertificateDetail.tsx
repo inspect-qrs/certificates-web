@@ -58,7 +58,7 @@ const CertificateDetail = (): ReactElement => {
                   <p className='text-center font-bold'>Duración: {certificate.duration}</p>
                   <p className='text-center italic'>Brindado por la empresa {certificate.company}</p>
                   <p className='text-center italic'>Del {new Date(certificate.startDate).toLocaleDateString()} a {new Date(certificate.endDate).toLocaleDateString()} en {certificate.place}</p>
-                  <img src="/src/assets/firma.png" alt="" className='h-auto sm:h-[150px]' />
+                  <img src="/firma.png" alt="" className='h-auto sm:h-[150px]' />
                 </div>
 
                 <div className='flex flex-col items-center gap-4 sm:gap-0 sm:flex-row sm:justify-between'>
