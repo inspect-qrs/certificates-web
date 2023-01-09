@@ -43,8 +43,8 @@ const CertificateDetail = (): ReactElement => {
       {
         id !== ''
           ? (
-            <div className='min-h-screen sm:h-screen p-3'>
-              <div className=' h-full p-6 px-24 flex flex-col justify-between gap-5 sm:gap-0'>
+            <div className='min-h-screen h-full sm:h-screen p-3'>
+              <div className='h-full p-6 px-24 flex flex-col justify-between gap-5 sm:gap-0'>
                 <div className='flex justify-between'>
                   <img src="/logo.png" alt="logo" className='h-auto sm:h-[150px] w-auto' />
                   <img src="/escudo.png" alt="escudo" className='h-auto sm:h-[150px] w-auto' />
@@ -61,15 +61,13 @@ const CertificateDetail = (): ReactElement => {
                   <img src="/firma.png" alt="" className='h-auto sm:h-[150px]' />
                 </div>
 
-                <div className='flex flex-col items-center gap-4 sm:gap-0 sm:flex-row sm:justify-between'>
+                <div className='flex flex-col items-center gap-4 sm:gap-0 sm:flex-row sm:justify-between pb-4'>
                   <img className='' src="/brand.png" alt="brand" />
                   <p className='text-center'>Av. República de Panamá 4575 Ofic. 803-804. Lima 34 - Perú</p>
                   <div className='w-auto max-w-[120px]'>
                     <QRCode
-                      size={256}
                       style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
                       value={qrValue}
-                      viewBox={'0 0 256 256'}
                     />
                   </div>
                 </div>
