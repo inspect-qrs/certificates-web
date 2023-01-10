@@ -12,7 +12,7 @@ const Certificates = (): ReactElement => {
   const certificatesService = new CertificatesService()
   const [certificates, setCertificates] = useState<Certificate[]>([])
 
-  const [sortColumn, setSortColumn] = useState<keyof Certificate>('id')
+  const [sortColumn, setSortColumn] = useState<keyof Certificate>('name')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
   const [filterColumn, setFilterColumn] = useState<keyof Certificate>('dni')
   const [filterText, setFilterText] = useState('')
@@ -154,15 +154,6 @@ const Certificates = (): ReactElement => {
                       </th>
                     ))
                   }
-                  {/* <th scope='col' className={headStyle} onClick={() => { handleSortColumn('name') }}>Name <FilterIconDesc className='text-white'/></th>
-                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('lastName') }}>LastName</th>
-                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('dni') }}>Dni</th>
-                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('course') }}>Course</th>
-                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('duration') }}>Duration</th>
-                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('company') }}>Company</th>
-                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('place') }}>Place</th>
-                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('startDate') }}>Start Date</th>
-                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('endDate') }}>End Date</th> */}
                 </tr>
               </thead>
               <tbody>
@@ -172,7 +163,7 @@ const Certificates = (): ReactElement => {
                       onClick={() => {
                         navigate(`/certificate?id=${id}`)
                       }}
-                      className='bg-white border-b cursor-pointer transition duration-300 ease-in-out hover:bg-gray-100'
+                      className='bg-white border-b cursor-pointer transition duration-300 ease-in-out hover:bg-gray-200'
                     >
                       <td className={bodyStyle}>{name}</td>
                       <td className={bodyStyle}>{lastName}</td>
