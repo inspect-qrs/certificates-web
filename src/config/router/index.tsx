@@ -4,11 +4,15 @@ import Layout from '@/components/Layout'
 import NotFoundView from '@/pages/NotFoundView'
 import Dashboard from '@/pages/Dashboard'
 import CertificateDetail from '@/pages/CertificateDetail'
+import Home from '@/components/Home'
 
 const authRequiredRoutes: RouteObject[] = [
   {
-    index: true,
     path: '',
+    element: <Home />
+  },
+  {
+    path: 'dashboard',
     element: <Dashboard />
   }
 ]
