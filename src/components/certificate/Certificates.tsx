@@ -4,6 +4,7 @@ import { Certificate } from '@/types/certificate.interface'
 import ImportExcel from './ImportExcel'
 import { useNavigate } from 'react-router-dom'
 import { FilterIconDesc, FilterIconAsc } from '@/assets/FilterIcon'
+import useMediaQuery from '@/hooks/UseMediaQuery'
 
 const COLUMNS = ['name', 'lastName', 'dni', 'course', 'company', 'place']
 
@@ -18,6 +19,8 @@ const Certificates = (): ReactElement => {
 
   const [isModalShowed, setIsModalShowed] = useState(false)
   const navigate = useNavigate()
+
+  const isAboveSmallScreens = useMediaQuery('(min-width: 640px)')
 
   useEffect(() => {
     void certificatesService.findAll()
@@ -74,14 +77,33 @@ const Certificates = (): ReactElement => {
     return sortDirection === 'asc' ? <FilterIconAsc className={className} /> : <FilterIconDesc className={className} />
   }
 
-  return (
-    <main>
-      {isModalShowed && <ImportExcel close={() => { setIsModalShowed(!isModalShowed) }} addCertificates={handleImportExcel} />}
-      <div className='flex justify-between items-center mb-5'>
-        <h1 className='uppercase font-bold text-xl'>Certificates</h1>
-        <button className='bg-blue text-white px-5 py-2 rounded-lg text-lg' onClick={() => { setIsModalShowed(!isModalShowed) }}>Import</button>
+  const filterMobile = (): ReactElement => (
+    <>
+      <div className='mb-2'>
+        <p className='font-medium uppercase'>Filter</p>
+        <input
+          type="text"
+          value={filterText}
+          className='block w-full h-10 px-2 border-b border-solid border-blue-dark outline-none'
+          placeholder='Enter value to filter'
+          onChange={e => { setFilterText(e.target.value) }}
+        />
       </div>
+      <div>
+        <p className='font-medium uppercase'>Column to filter</p>
+        <select value={filterColumn} onChange={handleChangeFilterColumn} className='block w-full h-10 px-2 border-b border-solid border-blue-dark outline-none uppercase'>
+          {
+            COLUMNS.map((column, index) => (
+              <option key={index} value={column}>{column}</option>
+            ))
+          }
+        </select>
+      </div>
+    </>
+  )
 
+  const filterDesktop = (): ReactElement => (
+    <>
       <div className='grid grid-cols-filter gap-4'>
         <p className='font-medium uppercase'>Filter</p>
         <p className='font-medium uppercase'>Column to filter</p>
@@ -102,7 +124,20 @@ const Certificates = (): ReactElement => {
           }
         </select>
       </div>
+    </>
+  )
 
+  return (
+    <main>
+      {isModalShowed && <ImportExcel close={() => { setIsModalShowed(!isModalShowed) }} addCertificates={handleImportExcel} />}
+      <div className='flex justify-between items-center mb-5'>
+        <h1 className='uppercase font-bold text-xl'>Certificates</h1>
+        <button className='bg-blue text-white px-5 py-2 rounded-lg text-lg' onClick={() => { setIsModalShowed(!isModalShowed) }}>Import</button>
+      </div>
+
+      <div className='mb-4'>
+      { isAboveSmallScreens ? filterDesktop() : filterMobile() }
+      </div>
       <div className='overflow-x-auto h-full sm:-mx-6 lg:-mx-8'>
         <div className='inline-block min-w-full min-h-full sm:px-6 lg:px-8'>
           <div className='overflow-hidden'>
@@ -114,8 +149,8 @@ const Certificates = (): ReactElement => {
                       <th
                         key={index}
                         scope='col' className={headStyle} onClick={() => { handleSortColumn(header) }}
-                        >
-                        <p className='flex items-center justify-between'>{header} {sortColumn === header && getFilterIcon() }</p>
+                      >
+                        <p className='flex items-center justify-between'>{header} {sortColumn === header && getFilterIcon()}</p>
                       </th>
                     ))
                   }
