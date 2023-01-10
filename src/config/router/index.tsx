@@ -6,7 +6,7 @@ import Dashboard from '@/pages/Dashboard'
 import CertificateDetail from '@/pages/CertificateDetail'
 import Home from '@/components/Home'
 
-const authRequiredRoutes: RouteObject[] = [
+const router = createBrowserRouter([
   {
     path: '',
     element: <Home />
@@ -14,14 +14,6 @@ const authRequiredRoutes: RouteObject[] = [
   {
     path: 'dashboard',
     element: <Dashboard />
-  }
-]
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Layout />,
-    children: authRequiredRoutes
   },
   {
     path: 'certificate',
