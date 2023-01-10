@@ -1,12 +1,11 @@
 import React, { ReactElement } from 'react'
 import Certificates from '@/components/certificate/Certificates'
-import Header from '@/components/Header'
 
 const Dashboard = (): ReactElement => {
   return (
     <>
-      <Header />
-      <div className='container'>
+      {/* <Header /> */}
+      <div className='mt-4 w-[80%] mx-auto'>
         <Certificates />
       </div>
     </>

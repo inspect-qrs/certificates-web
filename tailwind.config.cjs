@@ -39,7 +39,7 @@ module.exports = {
         cyan: '#0dcaf0'
       },
       gridTemplateColumns: {
-        table: '1fr 2fr'
+        filter: '70% 30%'
       },
       boxShadow: {
         card: '0px 1px 10px -1px rgba(0,0,0,0.2)'

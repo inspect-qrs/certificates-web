@@ -3,6 +3,7 @@ import { CertificatesService } from '@/api/certificates.service'
 import { Certificate } from '@/types/certificate.interface'
 import ImportExcel from './ImportExcel'
 import { useNavigate } from 'react-router-dom'
+import { FilterIconDesc, FilterIconAsc } from '@/assets/FilterIcon'
 
 const COLUMNS = ['name', 'lastName', 'dni', 'course', 'company', 'place']
 
@@ -63,21 +64,37 @@ const Certificates = (): ReactElement => {
     setCertificates(certificates.concat(newCertificates))
   }
 
+  const headStyle = 'text-sm font-medium text-white px-6 py-4 capitalize cursor-pointer'
+  const bodyStyle = 'text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap '
+
+  const COLUMN_HEADERS = ['name', 'lastName', 'dni', 'course', 'duration', 'company', 'place', 'startDate', 'endDate']
+
+  const getFilterIcon = (): React.ReactElement => {
+    const className = 'text-white w-6 h-6'
+    return sortDirection === 'asc' ? <FilterIconAsc className={className} /> : <FilterIconDesc className={className} />
+  }
+
   return (
     <main>
       {isModalShowed && <ImportExcel close={() => { setIsModalShowed(!isModalShowed) }} addCertificates={handleImportExcel} />}
       <div className='flex justify-between items-center mb-5'>
         <h1 className='uppercase font-bold text-xl'>Certificates</h1>
-        <button className='bg-blue text-white px-4 py-1' onClick={() => { setIsModalShowed(!isModalShowed) }}>Import</button>
+        <button className='bg-blue text-white px-5 py-2 rounded-lg text-lg' onClick={() => { setIsModalShowed(!isModalShowed) }}>Import</button>
       </div>
 
-      <div>
+      <div className='grid grid-cols-filter gap-4'>
+        <p className='font-medium uppercase'>Filter</p>
+        <p className='font-medium uppercase'>Column to filter</p>
+      </div>
+      <div className='mb-6 grid grid-cols-filter gap-4'>
         <input
           type="text"
           value={filterText}
+          className='block w-full h-10 px-2 border-b border-solid border-blue-dark outline-none'
+          placeholder='Enter value to filter'
           onChange={e => { setFilterText(e.target.value) }}
         />
-        <select value={filterColumn} onChange={handleChangeFilterColumn}>
+        <select value={filterColumn} onChange={handleChangeFilterColumn} className='block w-full h-10 px-2 border-b border-solid border-blue-dark outline-none uppercase'>
           {
             COLUMNS.map((column, index) => (
               <option key={index} value={column}>{column}</option>
@@ -86,43 +103,60 @@ const Certificates = (): ReactElement => {
         </select>
       </div>
 
-      <table className='w-full'>
-        <thead>
-          <tr>
-            <th onClick={() => { handleSortColumn('name') }}>Name</th>
-            <th onClick={() => { handleSortColumn('lastName') }}>LastName</th>
-            <th onClick={() => { handleSortColumn('dni') }}>Dni</th>
-            <th onClick={() => { handleSortColumn('course') }}>Course</th>
-            <th onClick={() => { handleSortColumn('duration') }}>Duration</th>
-            <th onClick={() => { handleSortColumn('company') }}>Company</th>
-            <th onClick={() => { handleSortColumn('place') }}>Place</th>
-            <th onClick={() => { handleSortColumn('startDate') }}>Start Date</th>
-            <th onClick={() => { handleSortColumn('endDate') }}>End Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            filteredData.map(({ id, name, lastName, dni, course, duration, company, place, startDate, endDate }) => (
-              <tr key={id}
-                onClick={() => {
-                  navigate(`/certificate?id=${id}`)
-                }}
-                className='cursor-pointer hover:bg-gray-light'
-              >
-                <td>{name}</td>
-                <td>{lastName}</td>
-                <td>{dni}</td>
-                <td>{course}</td>
-                <td>{duration}</td>
-                <td>{company}</td>
-                <td>{place}</td>
-                <td>{startDate}</td>
-                <td>{endDate}</td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
+      <div className='overflow-x-auto h-full sm:-mx-6 lg:-mx-8'>
+        <div className='inline-block min-w-full min-h-full sm:px-6 lg:px-8'>
+          <div className='overflow-hidden'>
+            <table className='w-full h-full'>
+              <thead className='border-b bg-black'>
+                <tr>
+                  {
+                    COLUMN_HEADERS.map((header, index) => (
+                      <th
+                        key={index}
+                        scope='col' className={headStyle} onClick={() => { handleSortColumn(header) }}
+                        >
+                        <p className='flex items-center justify-between'>{header} {sortColumn === header && getFilterIcon() }</p>
+                      </th>
+                    ))
+                  }
+                  {/* <th scope='col' className={headStyle} onClick={() => { handleSortColumn('name') }}>Name <FilterIconDesc className='text-white'/></th>
+                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('lastName') }}>LastName</th>
+                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('dni') }}>Dni</th>
+                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('course') }}>Course</th>
+                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('duration') }}>Duration</th>
+                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('company') }}>Company</th>
+                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('place') }}>Place</th>
+                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('startDate') }}>Start Date</th>
+                  <th scope='col' className={headStyle} onClick={() => { handleSortColumn('endDate') }}>End Date</th> */}
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  filteredData.map(({ id, name, lastName, dni, course, duration, company, place, startDate, endDate }) => (
+                    <tr key={id}
+                      onClick={() => {
+                        navigate(`/certificate?id=${id}`)
+                      }}
+                      className='bg-white border-b cursor-pointer transition duration-300 ease-in-out hover:bg-gray-100'
+                    >
+                      <td className={bodyStyle}>{name}</td>
+                      <td className={bodyStyle}>{lastName}</td>
+                      <td className={bodyStyle}>{dni}</td>
+                      <td className={bodyStyle}>{course}</td>
+                      <td className={bodyStyle}>{duration}</td>
+                      <td className={bodyStyle}>{company}</td>
+                      <td className={bodyStyle}>{place}</td>
+                      <td className={bodyStyle}>{startDate}</td>
+                      <td className={bodyStyle}>{endDate}</td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </main>
   )
 }

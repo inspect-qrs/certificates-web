@@ -47,6 +47,8 @@ const ImportExcel = ({ close, addCertificates }: ImportExcelProps): ReactElement
         setError('El archivo no tiene la extension correcta')
         event.target.value = ''
         return
+      } else {
+        setError('')
       }
     }
 
@@ -57,11 +59,14 @@ const ImportExcel = ({ close, addCertificates }: ImportExcelProps): ReactElement
     <Modal>
       <h1 className='block uppercase text-center text-xl font-bold'>Import excel</h1>
       <form onSubmit={handleSubmit}>
-        <input onChange={onChange} type="file" accept='.xlsx,.xlsm,.xls,.xlt,.xlsb' />
-        <p className='m-0 text-red lowercase'>{error}</p>
-        <div className='flex gap-3'>
-          <button type='button' onClick={close}>Cancel</button>
-          <button type='submit'>Submit</button>
+        <div className='mt-5'>
+          <input onChange={onChange} type="file" accept='.xlsx,.xlsm,.xls,.xlt,.xlsb' />
+          <p className='m-0 mt-1 text-red lowercase'>{error}</p>
+        </div>
+
+        <div className='mt-5 flex gap-3 justify-center'>
+          <button className='bg-red text-white px-5 py-1 rounded-lg text-lg' type='button' onClick={close}>Cancel</button>
+          <button className='bg-blue text-white px-5 py-1 rounded-lg text-lg' type='submit'>Submit</button>
         </div>
       </form>
     </Modal>

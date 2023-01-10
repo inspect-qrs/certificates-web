@@ -1,8 +1,12 @@
 import React, { ReactElement } from 'react'
+import { Navigate } from 'react-router-dom'
 
 const NotFound = (): ReactElement => {
   return (
-    <h1>Not found</h1>
+    <div>
+      <Navigate to='/'/>
+    </div>
+
   )
 }
 
