@@ -38,6 +38,7 @@ const LoginView = (): ReactElement => {
         navigate('/dashboard')
       })
       .catch(error => {
+        console.log(error)
         const { message } = error
         setError(message)
       })
