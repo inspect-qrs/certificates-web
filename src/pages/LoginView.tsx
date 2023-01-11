@@ -22,6 +22,7 @@ const LoginView = (): ReactElement => {
   const isAuth = useAuthStore((state) => state.isAuth)
 
   const [data, setData] = useState<Login>(INITIAL_VALUE)
+  const [error, setError] = useState<string>('')
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -37,7 +38,8 @@ const LoginView = (): ReactElement => {
         navigate('/dashboard')
       })
       .catch(error => {
-        console.log(error)
+        const { message } = error
+        setError(message)
       })
   }
 
@@ -60,6 +62,7 @@ const LoginView = (): ReactElement => {
           <input
             className='block w-full h-10 px-2 border-b border-solid border-blue-dark outline-none  mb-5'
             onChange={handleChange} type="password" placeholder='password' value={data.password} name='password'/>
+          <p className='m-0 my-1 text-red lowercase'>{error}</p>
           <button className='bg-red text-white px-5 py-2 rounded-lg text-lg' type='submit'>Login</button>
         </form>
       </div>
