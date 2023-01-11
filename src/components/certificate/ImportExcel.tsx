@@ -1,6 +1,8 @@
 import { CertificatesService } from '@/api/certificates.service'
+import { ToastContext } from '@/pages/Dashboard'
 import { Certificate } from '@/types/certificate.interface'
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement, useContext, useState } from 'react'
+import { toast } from 'react-toastify'
 import Modal from '../Modal'
 
 interface ImportExcelProps {
@@ -9,6 +11,7 @@ interface ImportExcelProps {
 }
 
 const ImportExcel = ({ close, addCertificates }: ImportExcelProps): ReactElement => {
+  const toastContext = useContext(ToastContext)
   const certificatesService = new CertificatesService()
   const [file, setFile] = useState<File | null | undefined>(null)
   const [error, setError] = useState<string>('')
@@ -19,6 +22,7 @@ const ImportExcel = ({ close, addCertificates }: ImportExcelProps): ReactElement
 
     if (file === null || file === undefined) {
       setError('No se ha subido nigún archivo')
+      toast('No se ha subido nigún archivo', { toastId: toastContext.id, type: 'error' })
       return
     }
 
@@ -29,13 +33,14 @@ const ImportExcel = ({ close, addCertificates }: ImportExcelProps): ReactElement
       .then(response => {
         addCertificates(response)
         setIsLoading(false)
+        toast('Los certificados se importaron correctamente', { toastId: toastContext.id, type: 'success' })
         close()
       })
       .catch(error => {
         const { message } = error.data
         setIsLoading(false)
         setError(message)
-        console.log(error)
+        toast(message, { toastId: toastContext.id, type: 'error' })
       })
   }
 
@@ -49,6 +54,7 @@ const ImportExcel = ({ close, addCertificates }: ImportExcelProps): ReactElement
 
       if (!['xlsx', 'xlsm', 'xls', 'xlt', 'xlsb'].includes(ext)) {
         setError('El archivo no tiene la extension correcta')
+        toast('El archivo no tiene la extension correcta', { toastId: toastContext.id, type: 'error' })
         event.target.value = ''
         return
       } else {
