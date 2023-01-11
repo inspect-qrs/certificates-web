@@ -39,7 +39,7 @@ const LoginView = (): ReactElement => {
       })
       .catch(error => {
         console.log(error)
-        const { message } = error
+        const { message } = error.data
         setError(message)
       })
   }
