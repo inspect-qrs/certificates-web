@@ -3,8 +3,10 @@ import { CertificatesService } from '@/api/certificates.service'
 import { Certificate } from '@/types/certificate.interface'
 import ImportExcel from './ImportExcel'
 import { useNavigate } from 'react-router-dom'
-import { FilterIconDesc, FilterIconAsc } from '@/assets/FilterIcon'
+import { SortIconDesc, SortIconAsc } from '@/assets/SortIcons'
 import useMediaQuery from '@/hooks/UseMediaQuery'
+import { Column } from 'react-table'
+import Table from '../Table'
 
 interface CertificatesProps {
   dni?: string
@@ -35,7 +37,7 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
       void certificatesService.findAllByDni(dni)
         .then(setCertificates)
     }
-  }, [dni])
+  }, [])
 
   const handleSortColumn = (column: string): void => {
     if (sortColumn === column) {
@@ -43,6 +45,12 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
     }
 
     setSortColumn(column as keyof Certificate)
+  }
+
+  const getSortIcon = (column: string): React.ReactElement => {
+    if (sortColumn !== column) return (<span></span>)
+    const className = 'text-white w-6 h-6'
+    return sortDirection === 'asc' ? <SortIconAsc className={className} /> : <SortIconDesc className={className} />
   }
 
   const filteredData = useMemo(() => {
@@ -77,15 +85,21 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
     setCertificates(certificates.concat(newCertificates))
   }
 
-  const headStyle = 'text-sm font-medium text-white px-6 py-4 capitalize cursor-pointer'
-  const bodyStyle = 'text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap '
-
-  const COLUMN_HEADERS = ['fullName', 'dni', 'course', 'duration', 'company', 'place', 'certification', 'startDate', 'endDate']
-
-  const getFilterIcon = (): React.ReactElement => {
-    const className = 'text-white w-6 h-6'
-    return sortDirection === 'asc' ? <FilterIconAsc className={className} /> : <FilterIconDesc className={className} />
+  const handleRowClick = (id: string): void => {
+    navigate(`/certificate?id=${id}`)
   }
+
+  const COLUMN_HEADERS: Array<Column<Certificate>> = [
+    { Header: 'Full Name', accessor: 'fullName' },
+    { Header: 'Dni', accessor: 'dni' },
+    { Header: 'Course', accessor: 'course' },
+    { Header: 'Company', accessor: 'company' },
+    { Header: 'Place', accessor: 'place' },
+    { Header: 'Duration', accessor: 'duration' },
+    { Header: 'Certification', accessor: 'certification' },
+    { Header: 'Start Date', accessor: 'startDate' },
+    { Header: 'End Date', accessor: 'endDate' }
+  ]
 
   const filterMobile = (): ReactElement => (
     <>
@@ -138,25 +152,21 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
   )
 
   return (
-    <main>
+    <main className='mb-5'>
       {isModalShowed && <ImportExcel close={close} addCertificates={handleImportExcel} />}
       <div className='mb-4'>
         {isAboveSmallScreens ? filterDesktop() : filterMobile()}
       </div>
-
-      <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
-        <div className='inline-block min-w-full sm:px-6 lg:px-8'>
-          <div className='overflow-hidden'>
-            <table className='min-w-full'>
+      {/* <table className='min-w-full'>
               <thead className='border-b bg-black'>
                 <tr>
                   {
-                    COLUMN_HEADERS.map((header, index) => (
+                    COLUMN_HEADERS.map(({ Header, accessor }, index) => (
                       <th
                         key={index}
-                        scope='col' className={headStyle} onClick={() => { handleSortColumn(header) }}
+                        scope='col' className={headStyle} onClick={() => { handleSortColumn(accessor) }}
                       >
-                        <p className='flex items-center justify-center gap-4'>{header} {sortColumn === header && getFilterIcon()}</p>
+                        <p className='flex items-center justify-center gap-4'>{Header} {sortColumn === accessor && getFilterIcon()}</p>
                       </th>
                     ))
                   }
@@ -184,12 +194,10 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
                   ))
                 }
               </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+            </table> */}
+      <Table columns={COLUMN_HEADERS} data={filteredData} sortIcon={getSortIcon} setSortColumn={handleSortColumn} onRowClick={handleRowClick} />
 
-    </main>
+    </main >
   )
 }
 

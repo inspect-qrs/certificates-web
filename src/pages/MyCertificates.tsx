@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react'
-import Certificates from '../certificate/Certificates'
+import Certificates from '../components/certificate/Certificates'
 
 const isNumber = (value: string): boolean => {
   return /^\d+$/.test(value)

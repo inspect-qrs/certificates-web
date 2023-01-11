@@ -41,7 +41,7 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
 
   return (
     <div className='min-h-screen h-full sm:h-screen p-3' ref={reference}>
-      <div className='h-full p-6 px-24 flex flex-col justify-between gap-5 sm:gap-0'>
+      <div className='h-full p-6 sm:px-24 flex flex-col justify-between gap-5 sm:gap-0'>
         <div className='flex justify-between'>
           <img src="/logo.png" alt="logo" className='h-auto sm:h-[120px] w-auto' />
           <img src="/escudo.png" alt="escudo" className='h-auto sm:h-[120px] w-auto' />

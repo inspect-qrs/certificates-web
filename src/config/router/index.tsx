@@ -6,7 +6,7 @@ import Dashboard from '@/pages/Dashboard'
 import CertificateDetail from '@/pages/CertificateDetail'
 import LoginView from '@/pages/LoginView'
 import Home from '@/components/Home'
-import MyCertificates from '@/components/public/MyCertificates'
+import MyCertificates from '@/pages/MyCertificates'
 
 const AUTH_REQUIRED: RouteObject[] = [
   {
