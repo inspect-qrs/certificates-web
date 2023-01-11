@@ -56,13 +56,13 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
           <p className='text-center italic'>Brindado por la empresa {certificate.company}</p>
           <p className='text-center italic'>Modalidad <span className='font-medium'>{certificate.modality}</span></p>
           <p className='text-center italic'>Del {new Date(certificate.startDate).toLocaleDateString()} a {new Date(certificate.endDate).toLocaleDateString()} en {certificate.place}</p>
-          <div className='flex'>
+          <div className='sm:flex'>
             <img src="/firma.png" alt="" className='h-auto sm:h-[120px]' />
             { certificate.numSigns === '2' && <img src="/firma.png" alt="" className='h-auto sm:h-[120px]' />}
           </div>
         </div>
 
-        <div className='flex items-center flex-row justify-between pb-4'>
+        <div className='flex flex-col items-center gap-4 sm:gap-0 sm:flex-row sm:justify-between pb-4'>
           <img className='' src="/brand.png" alt="brand" />
           <p className='text-center'>Av. República de Panamá 4575 Ofic. 803-804. Lima 34 - Perú</p>
           <div className='w-auto max-w-[120px]'>
