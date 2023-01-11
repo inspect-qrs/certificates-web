@@ -21,20 +21,20 @@ const Header = (): ReactElement => {
     >
       <img
         className='w-full min-w-[35px]'
-        src="/src/assets/menu-icon.svg" alt="menu-icon" />
+        src="/menu-icon.svg" alt="menu-icon" />
     </button>
   )
 
   const mobileNav = (): ReactElement => (
     <div className={'absolute bg-black top-0 left-0 w-full text-center transition'}>
-      <NavBar handleClick={handleLinkClick}/>
+      <NavBar handleClick={handleLinkClick} linkClassNames='block mb-2'/>
       <button
         onClick={() => { setIsMenuToggled(!isMenuToggled) }}
         className='mt-3'
       >
         <img
           className='w-full min-w-[35px]'
-          src="/src/assets/close-icon.svg" alt="close-icon" />
+          src="/close-icon.svg" alt="close-icon" />
       </button>
     </div>
   )

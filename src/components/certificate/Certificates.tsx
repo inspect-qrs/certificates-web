@@ -6,9 +6,15 @@ import { useNavigate } from 'react-router-dom'
 import { FilterIconDesc, FilterIconAsc } from '@/assets/FilterIcon'
 import useMediaQuery from '@/hooks/UseMediaQuery'
 
+interface CertificatesProps {
+  dni?: string
+  isModalShowed?: boolean
+  close?: () => void
+}
+
 const COLUMNS = ['name', 'lastName', 'dni', 'course', 'company', 'place']
 
-const Certificates = (): ReactElement => {
+const Certificates = ({ dni = '', isModalShowed = false, close = () => { console.log('close') } }: CertificatesProps): ReactElement => {
   const certificatesService = new CertificatesService()
   const [certificates, setCertificates] = useState<Certificate[]>([])
 
@@ -17,14 +23,18 @@ const Certificates = (): ReactElement => {
   const [filterColumn, setFilterColumn] = useState<keyof Certificate>('dni')
   const [filterText, setFilterText] = useState('')
 
-  const [isModalShowed, setIsModalShowed] = useState(false)
   const navigate = useNavigate()
 
   const isAboveSmallScreens = useMediaQuery('(min-width: 640px)')
 
   useEffect(() => {
-    void certificatesService.findAll()
-      .then(setCertificates)
+    if (dni === '') {
+      void certificatesService.findAll()
+        .then(setCertificates)
+    } else {
+      void certificatesService.findAllByDni(dni)
+        .then(setCertificates)
+    }
   }, [])
 
   const handleSortColumn = (column: string): void => {
@@ -129,19 +139,15 @@ const Certificates = (): ReactElement => {
 
   return (
     <main>
-      {isModalShowed && <ImportExcel close={() => { setIsModalShowed(!isModalShowed) }} addCertificates={handleImportExcel} />}
-      <div className='flex justify-between items-center mb-5'>
-        <h1 className='uppercase font-bold text-xl'>Certificates</h1>
-        {/* <button className='bg-blue text-white px-5 py-2 rounded-lg text-lg' onClick={() => { setIsModalShowed(!isModalShowed) }}>Import</button> */}
+      {isModalShowed && <ImportExcel close={close} addCertificates={handleImportExcel} />}
+      <div className='mb-4'>
+        {isAboveSmallScreens ? filterDesktop() : filterMobile()}
       </div>
 
-      <div className='mb-4'>
-      { isAboveSmallScreens ? filterDesktop() : filterMobile() }
-      </div>
-      <div className='overflow-x-auto h-full sm:-mx-6 lg:-mx-8'>
-        <div className='inline-block min-w-full min-h-full sm:px-6 lg:px-8'>
+      <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
+        <div className='inline-block min-w-full sm:px-6 lg:px-8'>
           <div className='overflow-hidden'>
-            <table className='w-full h-full'>
+            <table className='min-w-full text-center'>
               <thead className='border-b bg-black'>
                 <tr>
                   {

@@ -34,7 +34,7 @@ const NavBar = ({ linkClassNames, className, handleClick }: NavBarProps): ReactE
             key={name}
             to={to}
             className={({ isActive }) =>
-              ` py-3 font-m text-white px-6 text-center sm:rounded-2xl md:py-1 hover:bg-blue
+              ` py-3 font-m text-white px-6 text-center sm:rounded-lg sm:py-2 hover:bg-blue
                 ${linkClassNames ?? ''} ${isActive ? 'bg-blue' : ''}`
             }
             onClick={handleClick}
@@ -43,7 +43,7 @@ const NavBar = ({ linkClassNames, className, handleClick }: NavBarProps): ReactE
           </NavLink>
         )
       })}
-      <a onClick={handleLogout} className='block text-center cursor-pointer py-1 font-m text-white px-6 sm:rounded-2xl hover:bg-blue'>Logout</a>
+      <a onClick={handleLogout} className='block cursor-pointer py-3 font-m text-white px-6 text-center sm:rounded-lg sm:py-2 hover:bg-blue'>Logout</a>
     </div>
 
   )

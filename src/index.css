@@ -3,12 +3,11 @@
 @tailwind utilities;
 
 #root {
-  padding-bottom: 20px;
   height: 100%;
 }
 
 .container {
-  width: min(85%, 1400px);
+  width: min(90%, 1400px);
   margin: 0 auto;
 }
 

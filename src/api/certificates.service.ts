@@ -11,6 +11,11 @@ export class CertificatesService extends AppServices {
       .then(response => response.data)
   }
 
+  findAllByDni = async (dni: string): Promise<Certificate[]> => {
+    return await this.get<Certificate[]>(`/dni/${dni}`)
+      .then(response => response.data)
+  }
+
   findOneById = async (id: string): Promise<Certificate> => {
     return await this.get<Certificate>(`/${id}`)
       .then(response => response.data)

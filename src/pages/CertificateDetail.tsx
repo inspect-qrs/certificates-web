@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import CertificateToPdf from '@/components/certificate/CertificatePdf'
+import CertificateToPdf from '@/components/public/CertificatePdf'
 import { useReactToPrint } from 'react-to-print'
 
 const CertificateDetail = (): ReactElement => {

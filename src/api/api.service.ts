@@ -13,6 +13,7 @@ export abstract class AppServices {
 
   constructor (config: ApiConfig) {
     this._fullUrl = `${API_BASE_URL}/${config.url}`
+    this.setHeader()
   }
 
   setHeader (): void {
