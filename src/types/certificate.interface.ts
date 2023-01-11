@@ -1,12 +1,15 @@
 export interface Certificate {
   id: string
-  name: string
-  lastName: string
+  fullName: string
   dni: string
+  area: string
   course: string
-  duration: string
   company: string
   place: string
+  modality: string
+  duration: string
+  certification: string
+  numSigns: string
   startDate: string
   endDate: string
 }

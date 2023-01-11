@@ -22,7 +22,7 @@ const CertificateDetail = (): ReactElement => {
         id !== ''
           ? (
             <div className='mt-4'>
-              <button className='ml-4 px-4 py-1 rounded-lg text-white bg-blue' onClick={handlePrint}>Print</button>
+              <button className='ml-4 px-4 py-1 rounded-lg text-white bg-red' onClick={handlePrint}>Print</button>
               <CertificateToPdf id={id} reference={certificateRef}/>
             </div>
             )

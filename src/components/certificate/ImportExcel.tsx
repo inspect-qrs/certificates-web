@@ -65,8 +65,8 @@ const ImportExcel = ({ close, addCertificates }: ImportExcelProps): ReactElement
         </div>
 
         <div className='mt-5 flex gap-3 justify-center'>
-          <button className='bg-red text-white px-5 py-1 rounded-lg text-lg' type='button' onClick={close}>Cancel</button>
-          <button className='bg-blue text-white px-5 py-1 rounded-lg text-lg' type='submit'>Submit</button>
+          <button className='bg-black text-white px-5 py-1 rounded-lg text-lg' type='button' onClick={close}>Cancel</button>
+          <button className='bg-red text-white px-5 py-1 rounded-lg text-lg' type='submit'>Submit</button>
         </div>
       </form>
     </Modal>

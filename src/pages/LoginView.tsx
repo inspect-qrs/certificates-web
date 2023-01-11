@@ -60,7 +60,7 @@ const LoginView = (): ReactElement => {
           <input
             className='block w-full h-10 px-2 border-b border-solid border-blue-dark outline-none  mb-5'
             onChange={handleChange} type="password" placeholder='password' value={data.password} name='password'/>
-          <button className='bg-blue text-white px-5 py-2 rounded-lg text-lg' type='submit'>Login</button>
+          <button className='bg-red text-white px-5 py-2 rounded-lg text-lg' type='submit'>Login</button>
         </form>
       </div>
     </div>

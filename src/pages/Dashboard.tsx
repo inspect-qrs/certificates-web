@@ -13,7 +13,7 @@ const Dashboard = (): ReactElement => {
           <div className='flex justify-between items-center mb-5'>
             <h1 className='uppercase font-bold text-xl'>Certificates</h1>
             <button
-              className='bg-blue text-white px-5 py-2 rounded-lg text-lg'
+              className='bg-red text-white px-5 py-2 rounded-lg text-lg'
               onClick={() => { setIsModalShowed(!isModalShowed) }}
             >
               Import

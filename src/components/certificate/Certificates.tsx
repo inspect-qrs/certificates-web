@@ -12,13 +12,13 @@ interface CertificatesProps {
   close?: () => void
 }
 
-const COLUMNS = ['name', 'lastName', 'dni', 'course', 'company', 'place']
+const COLUMNS = ['fullName', 'dni', 'course', 'company', 'place', 'certification']
 
 const Certificates = ({ dni = '', isModalShowed = false, close = () => { console.log('close') } }: CertificatesProps): ReactElement => {
   const certificatesService = new CertificatesService()
   const [certificates, setCertificates] = useState<Certificate[]>([])
 
-  const [sortColumn, setSortColumn] = useState<keyof Certificate>('name')
+  const [sortColumn, setSortColumn] = useState<keyof Certificate>('fullName')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
   const [filterColumn, setFilterColumn] = useState<keyof Certificate>('dni')
   const [filterText, setFilterText] = useState('')
@@ -35,7 +35,7 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
       void certificatesService.findAllByDni(dni)
         .then(setCertificates)
     }
-  }, [])
+  }, [dni])
 
   const handleSortColumn = (column: string): void => {
     if (sortColumn === column) {
@@ -80,7 +80,7 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
   const headStyle = 'text-sm font-medium text-white px-6 py-4 capitalize cursor-pointer'
   const bodyStyle = 'text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap '
 
-  const COLUMN_HEADERS = ['name', 'lastName', 'dni', 'course', 'duration', 'company', 'place', 'startDate', 'endDate']
+  const COLUMN_HEADERS = ['fullName', 'dni', 'course', 'duration', 'company', 'place', 'certification', 'startDate', 'endDate']
 
   const getFilterIcon = (): React.ReactElement => {
     const className = 'text-white w-6 h-6'
@@ -147,7 +147,7 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
       <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
         <div className='inline-block min-w-full sm:px-6 lg:px-8'>
           <div className='overflow-hidden'>
-            <table className='min-w-full text-center'>
+            <table className='min-w-full'>
               <thead className='border-b bg-black'>
                 <tr>
                   {
@@ -156,7 +156,7 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
                         key={index}
                         scope='col' className={headStyle} onClick={() => { handleSortColumn(header) }}
                       >
-                        <p className='flex items-center justify-between'>{header} {sortColumn === header && getFilterIcon()}</p>
+                        <p className='flex items-center justify-center gap-4'>{header} {sortColumn === header && getFilterIcon()}</p>
                       </th>
                     ))
                   }
@@ -164,20 +164,20 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
               </thead>
               <tbody>
                 {
-                  filteredData.map(({ id, name, lastName, dni, course, duration, company, place, startDate, endDate }) => (
+                  filteredData.map(({ id, fullName, dni, course, duration, company, place, certification, startDate, endDate }) => (
                     <tr key={id}
                       onClick={() => {
                         navigate(`/certificate?id=${id}`)
                       }}
                       className='bg-white border-b cursor-pointer transition duration-300 ease-in-out hover:bg-gray-200'
                     >
-                      <td className={bodyStyle}>{name}</td>
-                      <td className={bodyStyle}>{lastName}</td>
+                      <td className={bodyStyle}>{fullName}</td>
                       <td className={bodyStyle}>{dni}</td>
                       <td className={bodyStyle}>{course}</td>
                       <td className={bodyStyle}>{duration}</td>
                       <td className={bodyStyle}>{company}</td>
                       <td className={bodyStyle}>{place}</td>
+                      <td className={bodyStyle}>{certification}</td>
                       <td className={bodyStyle}>{startDate}</td>
                       <td className={bodyStyle}>{endDate}</td>
                     </tr>
