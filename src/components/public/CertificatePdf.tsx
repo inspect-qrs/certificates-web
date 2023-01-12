@@ -42,9 +42,9 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
   return (
     <div className='min-h-screen h-full sm:h-screen p-3' ref={reference}>
       <div className='h-full p-6 sm:px-24 flex flex-col justify-between gap-5 sm:gap-0'>
-        <div className='flex justify-between'>
-          <img src="/logo.png" alt="logo" className='h-auto sm:h-[120px] w-auto' />
-          <img src="/escudo.png" alt="escudo" className='h-auto sm:h-[120px] w-auto' />
+        <div className='flex justify-between items-center'>
+          <img src="/logo.png" alt="logo" className='h-auto sm:h-[80px] w-auto' />
+          <img src="/escudo.png" alt="escudo" className='h-auto sm:h-[100px] w-auto' />
         </div>
         <div className='flex flex-col items-center justify-center gap-2 h-[75%] text-lg'>
           <h1 className='font-bold uppercase text-4xl'>Certificado</h1>
@@ -63,7 +63,7 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
         </div>
 
         <div className='flex flex-col items-center gap-4 sm:gap-0 sm:flex-row sm:justify-between pb-4'>
-          <img className='' src="/brand.png" alt="brand" />
+          <img className='w-[200px] contrast-50' src="/brand.png" alt="brand" />
           <p className='text-center'>Av. República de Panamá 4575 Ofic. 803-804. Lima 34 - Perú</p>
           <div className='w-auto max-w-[120px]'>
             <QRCode
