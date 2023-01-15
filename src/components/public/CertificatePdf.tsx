@@ -69,7 +69,7 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
             </div>
 
             <div className='flex flex-col justify-center items-center gap-4 sm:gap-0 pb-4'>
-              <div className='w-full flex flex-col sm:flex-row justify-between items-end'>
+              <div className='w-full flex flex-col sm:flex-row justify-between items-center sm:items-end'>
                 <img className='w-[200px] contrast-50' src="/brand.png" alt="brand" />
                 <div className='w-auto max-w-[120px]'>
                   <QRCode
