@@ -69,9 +69,9 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
             </div>
 
             <div className='flex flex-col justify-center items-center gap-4 sm:gap-0 pb-4'>
-              <div className='w-full flex flex-col sm:flex-row justify-between items-center sm:items-end'>
-                <img className='w-[200px] contrast-50' src="/brand.png" alt="brand" />
-                <div className='w-auto max-w-[120px]'>
+              <div className='w-full flex flex-col sm:flex-row justify-between items-center sm:items-end gap-2'>
+                <img className='w-[200px] contrast-50 order-2 sm:order-1' src="/brand.png" alt="brand" />
+                <div className='w-auto max-w-[120px] order-1 sm:order-2'>
                   <QRCode
                     style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
                     value={qrValue}
