@@ -5,10 +5,8 @@ export interface Certificate {
   area: string
   course: string
   company: string
-  place: string
   modality: string
   duration: string
   certification: string
-  startDate: string
-  endDate: string
+  date: string
 }

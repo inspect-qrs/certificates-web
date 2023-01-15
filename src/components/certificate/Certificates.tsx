@@ -113,11 +113,9 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
     { Header: 'Dni', accessor: 'dni' },
     { Header: 'Curso', accessor: 'course' },
     { Header: 'Compañia', accessor: 'company' },
-    { Header: 'Lugar', accessor: 'place' },
     { Header: 'Duración', accessor: 'duration' },
     { Header: 'Certificación', accessor: 'certification' },
-    { Header: 'Fecha Inicio', accessor: row => formatDate(row.startDate) },
-    { Header: 'Fecha Fin', accessor: row => formatDate(row.endDate) }
+    { Header: 'Fecha', accessor: row => formatDate(row.date) }
   ]
 
   const filterMobile = (): ReactElement => (
