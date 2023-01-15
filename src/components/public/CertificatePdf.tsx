@@ -46,8 +46,8 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
         : (
           <div className='h-full p-6 sm:px-24 flex flex-col justify-between gap-5 sm:gap-0'>
             <div className='flex justify-between items-center'>
-              <img src="/logo.png" alt="logo" className='h-auto sm:h-[80px] w-auto' />
-              <img src="/escudo.png" alt="escudo" className='h-auto sm:h-[100px] w-auto' />
+              <img src="/logo.png" alt="logo" className='h-[80px] w-auto' />
+              <img src="/escudo.png" alt="escudo" className='h-[100px] w-auto' />
             </div>
             <div className='flex flex-col items-center justify-center gap-2 h-[75%] text-lg'>
               <h1 className='font-bold uppercase text-4xl'>Certificado</h1>
@@ -69,7 +69,7 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
             </div>
 
             <div className='flex flex-col justify-center items-center gap-4 sm:gap-0 pb-4'>
-              <div className='w-full flex justify-between items-end'>
+              <div className='w-full flex flex-col sm:flex-row justify-between items-end'>
                 <img className='w-[200px] contrast-50' src="/brand.png" alt="brand" />
                 <div className='w-auto max-w-[120px]'>
                   <QRCode
