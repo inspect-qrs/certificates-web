@@ -7,16 +7,26 @@ import { SortIconDesc, SortIconAsc } from '@/assets/SortIcons'
 import useMediaQuery from '@/hooks/UseMediaQuery'
 import { Column } from 'react-table'
 import Table from '../Table'
+import DeleteModal from './DeleteModal'
 
 interface CertificatesProps {
   dni?: string
-  isModalShowed?: boolean
-  close?: () => void
+  isExcelModalShowed?: boolean
+  closeExcelModal?: () => void
+  isDeleteModalShowed?: boolean
+  closeDeleteModal?: () => void
 }
 
-const COLUMNS = ['fullName', 'dni', 'course', 'company', 'place', 'certification']
+const FILTER_COLUMNS = [
+  { name: 'Nombre completo', value: 'fullName' },
+  { name: 'Dni', value: 'dni' },
+  { name: 'Curso', value: 'course' },
+  { name: 'Empresa', value: 'company' },
+  { name: 'Lugar', value: 'place' },
+  { name: 'Certificados', value: 'certification' }
+]
 
-const Certificates = ({ dni = '', isModalShowed = false, close = () => { console.log('close') } }: CertificatesProps): ReactElement => {
+const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = () => { console.log('closeExcelModal') }, isDeleteModalShowed = false, closeDeleteModal = () => { console.log('closeExcelModal') } }: CertificatesProps): ReactElement => {
   const certificatesService = new CertificatesService()
   const [certificates, setCertificates] = useState<Certificate[]>([])
 
@@ -85,26 +95,35 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
     setCertificates(certificates.concat(newCertificates))
   }
 
+  const handleRemovePeople = (certificatesToRemove: Certificate[]): void => {
+    const certificatesToRemoveIds = certificatesToRemove.map(certificate => certificate.certification)
+    setCertificates(certificates.filter(certificate => !certificatesToRemoveIds.includes(certificate.certification)))
+  }
+
   const handleRowClick = (id: string): void => {
-    navigate(`/certificate?id=${id}`)
+    navigate(`/certificado?id=${id}`)
+  }
+
+  const formatDate = (date: string): string => {
+    return new Date(date).toLocaleDateString('es-ES', { year: 'numeric', month: 'numeric', day: 'numeric' })
   }
 
   const COLUMN_HEADERS: Array<Column<Certificate>> = [
-    { Header: 'Full Name', accessor: 'fullName' },
+    { Header: 'Nombre completo', accessor: 'fullName' },
     { Header: 'Dni', accessor: 'dni' },
-    { Header: 'Course', accessor: 'course' },
-    { Header: 'Company', accessor: 'company' },
-    { Header: 'Place', accessor: 'place' },
-    { Header: 'Duration', accessor: 'duration' },
-    { Header: 'Certification', accessor: 'certification' },
-    { Header: 'Start Date', accessor: 'startDate' },
-    { Header: 'End Date', accessor: 'endDate' }
+    { Header: 'Curso', accessor: 'course' },
+    { Header: 'Compañia', accessor: 'company' },
+    { Header: 'Lugar', accessor: 'place' },
+    { Header: 'Duración', accessor: 'duration' },
+    { Header: 'Certificación', accessor: 'certification' },
+    { Header: 'Fecha Inicio', accessor: row => formatDate(row.startDate) },
+    { Header: 'Fecha Fin', accessor: row => formatDate(row.endDate) }
   ]
 
   const filterMobile = (): ReactElement => (
     <>
       <div className='mb-2'>
-        <p className='font-medium uppercase'>Filter</p>
+        <p className='font-medium uppercase'>Filtro</p>
         <input
           type="text"
           value={filterText}
@@ -114,11 +133,11 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
         />
       </div>
       <div>
-        <p className='font-medium uppercase'>Column to filter</p>
+        <p className='font-medium uppercase'>Columna a filtrar</p>
         <select value={filterColumn} onChange={handleChangeFilterColumn} className='block w-full h-10 px-2 border-b border-solid border-blue-dark outline-none uppercase'>
           {
-            COLUMNS.map((column, index) => (
-              <option key={index} value={column}>{column}</option>
+            FILTER_COLUMNS.map(({ value, name }, index) => (
+              <option key={index} value={value}>{name}</option>
             ))
           }
         </select>
@@ -129,8 +148,8 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
   const filterDesktop = (): ReactElement => (
     <>
       <div className='grid grid-cols-filter gap-4'>
-        <p className='font-medium uppercase'>Filter</p>
-        <p className='font-medium uppercase'>Column to filter</p>
+        <p className='font-medium uppercase'>Filtro</p>
+        <p className='font-medium uppercase'>Columna a filtrar</p>
       </div>
       <div className='mb-6 grid grid-cols-filter gap-4'>
         <input
@@ -142,8 +161,8 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
         />
         <select value={filterColumn} onChange={handleChangeFilterColumn} className='block w-full h-10 px-2 border-b border-solid border-blue-dark outline-none uppercase'>
           {
-            COLUMNS.map((column, index) => (
-              <option key={index} value={column}>{column}</option>
+            FILTER_COLUMNS.map(({ value, name }, index) => (
+              <option key={index} value={value}>{name}</option>
             ))
           }
         </select>
@@ -153,50 +172,13 @@ const Certificates = ({ dni = '', isModalShowed = false, close = () => { console
 
   return (
     <main className='mb-5'>
-      {isModalShowed && <ImportExcel close={close} addCertificates={handleImportExcel} />}
+      {isDeleteModalShowed && <DeleteModal close={closeDeleteModal} removeCertificates={handleRemovePeople}/>}
+      {isExcelModalShowed && <ImportExcel close={closeExcelModal} addCertificates={handleImportExcel} />}
       <div className='mb-4'>
         {isAboveSmallScreens ? filterDesktop() : filterMobile()}
       </div>
-      {/* <table className='min-w-full'>
-              <thead className='border-b bg-black'>
-                <tr>
-                  {
-                    COLUMN_HEADERS.map(({ Header, accessor }, index) => (
-                      <th
-                        key={index}
-                        scope='col' className={headStyle} onClick={() => { handleSortColumn(accessor) }}
-                      >
-                        <p className='flex items-center justify-center gap-4'>{Header} {sortColumn === accessor && getFilterIcon()}</p>
-                      </th>
-                    ))
-                  }
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  filteredData.map(({ id, fullName, dni, course, duration, company, place, certification, startDate, endDate }) => (
-                    <tr key={id}
-                      onClick={() => {
-                        navigate(`/certificate?id=${id}`)
-                      }}
-                      className='bg-white border-b cursor-pointer transition duration-300 ease-in-out hover:bg-gray-200'
-                    >
-                      <td className={bodyStyle}>{fullName}</td>
-                      <td className={bodyStyle}>{dni}</td>
-                      <td className={bodyStyle}>{course}</td>
-                      <td className={bodyStyle}>{duration}</td>
-                      <td className={bodyStyle}>{company}</td>
-                      <td className={bodyStyle}>{place}</td>
-                      <td className={bodyStyle}>{certification}</td>
-                      <td className={bodyStyle}>{startDate}</td>
-                      <td className={bodyStyle}>{endDate}</td>
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </table> */}
-      <Table columns={COLUMN_HEADERS} data={filteredData} sortIcon={getSortIcon} setSortColumn={handleSortColumn} onRowClick={handleRowClick} />
 
+      <Table columns={COLUMN_HEADERS} data={filteredData} sortIcon={getSortIcon} setSortColumn={handleSortColumn} onRowClick={handleRowClick} />
     </main >
   )
 }

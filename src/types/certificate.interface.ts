@@ -9,7 +9,6 @@ export interface Certificate {
   modality: string
   duration: string
   certification: string
-  numSigns: string
   startDate: string
   endDate: string
 }

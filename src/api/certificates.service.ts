@@ -25,4 +25,9 @@ export class CertificatesService extends AppServices {
     return await this.post<Certificate[]>('/import-excel', file)
       .then(response => response.data)
   }
+
+  removeMultiple = async (ids: string[]): Promise<Certificate[]> => {
+    return await this.patch<Certificate[]>('/remove-multiple', { ids })
+      .then(response => response.data)
+  }
 }

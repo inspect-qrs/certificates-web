@@ -12,7 +12,7 @@ const Header = (): ReactElement => {
   }
 
   const desktopNav = (): ReactElement => (
-    <NavBar handleClick={handleLinkClick} className='flex gap-2'/>
+    <NavBar handleClick={handleLinkClick} className='flex gap-2' />
   )
 
   const hamburgerMenu = (): ReactElement => (
@@ -27,7 +27,7 @@ const Header = (): ReactElement => {
 
   const mobileNav = (): ReactElement => (
     <div className={'absolute bg-black top-0 left-0 w-full text-center transition'}>
-      <NavBar handleClick={handleLinkClick} linkClassNames='block mb-2'/>
+      <NavBar handleClick={handleLinkClick} linkClassNames='block mb-2' />
       <button
         onClick={() => { setIsMenuToggled(!isMenuToggled) }}
         className='mt-3'
@@ -41,7 +41,10 @@ const Header = (): ReactElement => {
   return (
     <header className='bg-black shadow-md shadow-black/10 py-4 mb-4'>
       <nav className='flex items-center justify-between mx-auto w-5/6'>
-        <h4 className='text-3xl font-bold text-white invisible'>I</h4>
+        <div className='flex gap-4 items-center'>
+          <img className='max-w-[150px] border-r-2 border-red' src="/logo-blanco.png" alt="" />
+          <img className='max-w-[150px]' src="/brand.png" alt="" />
+        </div>
         {
           isAboveSmallScreens
             ? desktopNav()

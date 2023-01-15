@@ -2,7 +2,7 @@ import { useAuthStore } from '@/config/store/auth'
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { StatusCodes } from 'http-status-codes'
 
-const API_BASE_URL: string = import.meta.env.VITE_API_BASE_URL ?? ''
+const API_BASE_URL: string = import.meta.env.VITE_API_BASE_URL ?? '/api/v1'
 
 interface ApiConfig {
   url: string

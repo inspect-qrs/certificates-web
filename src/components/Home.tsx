@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'
 
 const Home = (): ReactElement => {
   return (
-    <Navigate to='/dashboard' />
+    <Navigate to='/admin' />
   )
 }
 

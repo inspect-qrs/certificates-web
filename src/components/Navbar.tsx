@@ -14,7 +14,7 @@ interface Link {
 }
 
 const links: Link[] = [
-  { name: 'Dashboard', to: '/dashboard' }
+  { name: 'Admin', to: '/admin' }
 ]
 
 const NavBar = ({ linkClassNames, className, handleClick }: NavBarProps): ReactElement => {
@@ -43,7 +43,8 @@ const NavBar = ({ linkClassNames, className, handleClick }: NavBarProps): ReactE
           </NavLink>
         )
       })}
-      <a onClick={handleLogout} className='block cursor-pointer py-3 font-m text-white px-6 text-center sm:rounded-lg sm:py-2 hover:bg-red'>Logout</a>
+      <a onClick={handleLogout} className='block cursor-pointer py-3 font-m text-white px-6 text-center sm:rounded-lg sm:py-2 hover:bg-red'
+      >Cerrar Sesión</a>
     </div>
 
   )

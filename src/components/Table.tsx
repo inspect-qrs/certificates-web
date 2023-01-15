@@ -1,8 +1,9 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import { Certificate } from '@/types/certificate.interface'
 import { Column, usePagination, useTable } from 'react-table'
 import { BackIcon, DoubleBackIcon, DoubleForwardIcon, ForwardIcon } from '@/assets/PaginationIcon'
 import Pagination, { PaginationButton } from './Pagination'
+import { SelectedRowsContext } from '@/pages/Dashboard'
 
 interface TableProps {
   columns: Array<Column<Certificate>>
@@ -33,8 +34,22 @@ const Table = ({ columns, data, sortIcon, setSortColumn, onRowClick = (id) => { 
     usePagination
   )
 
+  const { selectedRows, setSelectedRows } = useContext(SelectedRowsContext)
+
+  const handleSetPageSize = (page: number): void => {
+    setPageSize(page)
+  }
+
+  const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const { checked } = event.target
+    const id = event.target.attributes.getNamedItem('id')?.value ?? ''
+
+    const rows = checked ? [...selectedRows, id] : selectedRows.filter(row => row !== id)
+    setSelectedRows(rows)
+  }
+
   const headStyle = 'text-sm font-medium text-white px-6 py-4 capitalize cursor-pointer'
-  const bodyStyle = 'text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap '
+  const bodyStyle = 'text-sm font-light px-6 py-4 whitespace-nowrap uppercase cursor-pointer'
 
   const PAGINATION_BUTTONS: PaginationButton[] = [
     {
@@ -59,10 +74,6 @@ const Table = ({ columns, data, sortIcon, setSortColumn, onRowClick = (id) => { 
     }
   ]
 
-  const handleSetPageSize = (page: number): void => {
-    setPageSize(page)
-  }
-
   return (
     <>
       <div className='mb-4'>
@@ -78,6 +89,7 @@ const Table = ({ columns, data, sortIcon, setSortColumn, onRowClick = (id) => { 
               <thead className='border-b bg-black'>
                 {headerGroups.map((headerGroup, index) => (
                   <tr {...headerGroup.getHeaderGroupProps()} key={index}>
+                    <th className='px-4'></th>
                     {headerGroup.headers.map((column, index) => (
                       <th className={headStyle} {...column.getHeaderProps()} key={index} onClick={() => { setSortColumn(column.id ?? '') }} >
                         <p className='flex items-center justify-center gap-4'>{column.render('Header')} {sortIcon(column.id ?? '')}</p>
@@ -87,21 +99,21 @@ const Table = ({ columns, data, sortIcon, setSortColumn, onRowClick = (id) => { 
                 ))}
               </thead>
               <tbody {...getTableBodyProps()}>
-                {page.map((row, i) => {
+                {page.map((row) => {
                   prepareRow(row)
                   return (
                     <tr
                       {...row.getRowProps()}
-                      key={i}
-                      className='cursor-pointer bg-white border-b transition duration-300 ease-in-out hover:bg-gray-200'
-                      onClick={() => { onRowClick(row.original.id) }}
+                      key={row.original.id}
+                      className={`bg-white border-b transition duration-300 ease-in-out ${selectedRows.includes(row.original.id) ? 'bg-blue text-white' : 'hover:bg-gray-200'}`}
                     >
-
+                      <th className='max-w-[40px]'> <input type="checkbox" id={row.original.id} onChange={handleChangeCheckbox} checked={selectedRows.includes(row.original.id)} /> </th>
                       {row.cells.map((cell, index) => (
                         <td
                           {...cell.getCellProps()}
                           key={index}
-                          className={bodyStyle}
+                          className={`${bodyStyle} ${selectedRows.includes(row.original.id) ? 'text-white' : 'text-gray-900'}`}
+                          onClick={() => { onRowClick(row.original.id) }}
                         >{cell.render('Cell')} { }</td>
                       ))}
 

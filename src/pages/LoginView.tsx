@@ -26,7 +26,7 @@ const LoginView = (): ReactElement => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (isAuth) navigate('/dashboard')
+    if (isAuth) navigate('/admin')
   }, [])
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -35,7 +35,7 @@ const LoginView = (): ReactElement => {
       .then(response => {
         setToken(response.token)
         setUser(response.user)
-        navigate('/dashboard')
+        navigate('/admin')
       })
       .catch(error => {
         const { message } = error.data
@@ -54,17 +54,23 @@ const LoginView = (): ReactElement => {
   return (
     <div className='grid place-items-center h-screen container '>
       <div className='w-full max-w-[600px]'>
+        <div className='flex justify-center mb-16'>
+          <img className='max-w-[300px]' src="/logo.png" alt="" />
+        </div>
         <h2 className='block uppercase font-medium text-xl'>Login</h2>
         <form onSubmit={handleSubmit}>
           <input
             className='block w-full h-10 px-2 border-b border-solid border-blue-dark outline-none mb-5'
-            onChange={handleChange} type="text" placeholder='username' value={data.username} name='username'/>
+            onChange={handleChange} type="text" placeholder='username' value={data.username} name='username' />
           <input
             className='block w-full h-10 px-2 border-b border-solid border-blue-dark outline-none  mb-5'
-            onChange={handleChange} type="password" placeholder='password' value={data.password} name='password'/>
+            onChange={handleChange} type="password" placeholder='password' value={data.password} name='password' />
           <p className='m-0 my-1 text-red lowercase'>{error}</p>
-          <button className='bg-red text-white px-5 py-2 rounded-lg text-lg' type='submit'>Login</button>
+          <button className='block w-full bg-red text-white px-5 py-2 rounded-lg text-lg' type='submit'>Login</button>
         </form>
+        <div className='flex justify-center mt-6'>
+          <img className='max-w-[200px] contrast-50' src="/brand.png" alt="" />
+        </div>
       </div>
     </div>
   )

@@ -43,7 +43,7 @@ const MyCertificates = (): ReactElement => {
       <div className='container'>
         <div className='mt-5'>
           <div className='mb-5'>
-            <label className='font-medium uppercase'>Enter your dni</label>
+            <label className='font-medium uppercase'>Ingresa tu dni</label>
             <input
               onChange={onDniChange}
               className='block w-full h-10 px-2 border-b border-solid border-blue-dark outline-none'
@@ -57,12 +57,12 @@ const MyCertificates = (): ReactElement => {
                 disabled={error !== ''}
                 onClick={handleSubmitDni}
                 className={`${error !== '' ? 'bg-red-dark' : 'bg-red'}  text-white px-5 py-1 rounded-lg text-lg mt-4`}
-              >Search</button>
+              >Buscar</button>
 
               <button
                 onClick={clear}
                 className='bg-black text-white px-5 py-1 rounded-lg text-lg mt-4'
-              >Clear</button>
+              >Reiniciar</button>
             </div>
           </div>
 

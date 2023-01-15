@@ -14,7 +14,6 @@ const INITIAL_VALUE = {
   modality: '',
   duration: '',
   certification: '',
-  numSigns: '',
   startDate: '',
   endDate: ''
 }
@@ -58,7 +57,6 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
           <p className='text-center italic'>Del {new Date(certificate.startDate).toLocaleDateString()} a {new Date(certificate.endDate).toLocaleDateString()} en {certificate.place}</p>
           <div className='sm:flex'>
             <img src="/firma.png" alt="" className='h-auto sm:h-[120px]' />
-            { certificate.numSigns === '2' && <img src="/firma.png" alt="" className='h-auto sm:h-[120px]' />}
           </div>
         </div>
 

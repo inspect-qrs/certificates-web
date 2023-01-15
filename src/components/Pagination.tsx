@@ -37,7 +37,7 @@ const Pagination = ({ buttons, pageOptions }: PaginationProps): ReactElement => 
           }
         </div>
         <span>
-          Page{' '}
+          Página{' '}
           <strong>
             {pageOptions.pageIndex + 1} of {pageOptions.length}
           </strong>
@@ -52,7 +52,7 @@ const Pagination = ({ buttons, pageOptions }: PaginationProps): ReactElement => 
       >
         {PAGE_SIZE.map(pageSize => (
           <option key={pageSize} value={pageSize}>
-            Show {pageSize}
+            Mostrar {pageSize}
           </option>
         ))}
       </select>
