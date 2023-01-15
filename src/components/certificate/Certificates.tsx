@@ -105,7 +105,7 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
   }
 
   const formatDate = (date: string): string => {
-    return new Date(date).toLocaleDateString('es-ES', { year: 'numeric', month: 'numeric', day: 'numeric' })
+    return new Date(date).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' })
   }
 
   const COLUMN_HEADERS: Array<Column<Certificate>> = [
