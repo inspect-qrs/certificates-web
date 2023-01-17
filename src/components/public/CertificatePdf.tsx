@@ -60,7 +60,7 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
               <p className='text-center italic text-lg'>Brindado a la empresa {certificate.company}, en la ciudad de Lima, Perú</p>
               <p className='text-center italic text-lg'>el <span className='capitalize'>{new Date(certificate.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: '2-digit' })}</span></p>
               <div className='flex flex-col justify-center items-center mt-3'>
-                <img src="/firma.jpg" alt="" className='h-auto sm:h-[95px]' />
+                <img src="/firma.jpg" alt="" className='h-[95px]' />
                 <div className='text-sm border-t border-black px-6 -mt-6'>
                   <p className='font-bold'>Sandra Otero Kruger</p>
                   <p>Jefe de Capacitación</p>
