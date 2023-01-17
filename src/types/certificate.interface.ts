@@ -4,6 +4,7 @@ export interface Certificate {
   dni: string
   area: string
   course: string
+  mark: number
   company: string
   modality: string
   duration: string

@@ -9,6 +9,7 @@ const INITIAL_VALUE = {
   dni: '',
   area: '',
   course: '',
+  mark: 0,
   company: '',
   modality: '',
   duration: '',
@@ -53,11 +54,11 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
               <h1 className='font-bold uppercase text-5xl'>Certificado</h1>
               <p className='text-center text-2xl'>Otorgado a:</p>
               <p className='text-center font-bold uppercase text-3xl'>{certificate.fullName}</p>
-              <p className='text-center italic'>Por haber aprobado satisfactoriamente los cursos de:</p>
+              <p className='text-center italic'>Por haber { certificate.mark > 13 ? 'aprobado satisfactoriamente' : 'participado en'} el curso de:</p>
               <p className='text-center font-bold uppercase text-2xl'>{certificate.course}</p>
               <p className='text-center font-bold'>( <span className='font-bold'>{certificate.modality}</span> )</p>
               <p className='text-center font-bold'>Duración: {certificate.duration} horas</p>
-              <p className='text-center italic text-lg'>Brindado a la empresa {certificate.company}, en la ciudad de Lima, Perú</p>
+              <p className='text-center italic text-lg'>Brindado a la empresa {certificate.company.toUpperCase()}</p>
               <p className='text-center italic text-lg'>el <span className='capitalize'>{new Date(certificate.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: '2-digit' })}</span></p>
               <div className='flex flex-col justify-center items-center mt-3'>
                 <img src="/firma.jpg" alt="" className='h-[95px]' />

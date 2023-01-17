@@ -23,7 +23,8 @@ const FILTER_COLUMNS = [
   { name: 'Curso', value: 'course' },
   { name: 'Empresa', value: 'company' },
   { name: 'Lugar', value: 'place' },
-  { name: 'Certificados', value: 'certification' }
+  { name: 'Certificado', value: 'certification' },
+  { name: 'Nota', value: 'mark' }
 ]
 
 const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = () => { console.log('closeExcelModal') }, isDeleteModalShowed = false, closeDeleteModal = () => { console.log('closeExcelModal') } }: CertificatesProps): ReactElement => {
@@ -67,7 +68,7 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
     let filtered = certificates
     if (filterText) {
       filtered = filtered.filter(item =>
-        item[filterColumn].toLowerCase().includes(filterText.toLowerCase())
+        item[filterColumn].toString().toLowerCase().includes(filterText.toLowerCase())
       )
     }
     if (sortColumn) {
@@ -112,6 +113,7 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
     { Header: 'Nombre completo', accessor: 'fullName' },
     { Header: 'Dni', accessor: 'dni' },
     { Header: 'Curso', accessor: 'course' },
+    { Header: 'Nota', accessor: 'mark' },
     { Header: 'Compañia', accessor: 'company' },
     { Header: 'Duración', accessor: 'duration' },
     { Header: 'Certificación', accessor: 'certification' },
