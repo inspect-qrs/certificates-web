@@ -45,9 +45,9 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
           )
         : (
           <div className='h-full p-6 sm:px-36 flex flex-col justify-between gap-5 sm:gap-0'>
-            <div className='flex justify-between items-center'>
-              <img src="/logo.png" alt="logo" className='h-[80px] w-auto' />
-              <img src="/escudo.jpg" alt="escudo" className='h-[90px] w-auto' />
+            <div className='flex gap-2 justify-between items-center'>
+              <img src="/logo.png" alt="logo" className='h-[60px] sm:h-[80px] w-auto' />
+              <img src="/escudo.jpg" alt="escudo" className='h-[70px] sm:h-[90px] w-auto' />
             </div>
             <div className='flex flex-col items-center justify-center h-[75%] text-xl'>
               <h1 className='font-bold uppercase text-5xl'>Certificado</h1>
@@ -72,7 +72,7 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
               <div className='w-full flex flex-col sm:flex-row justify-between items-center sm:items-end gap-2'>
                 <img className='w-[200px] contrast-50 order-2 sm:order-1' src="/brand.png" alt="brand" />
                 <div className='w-auto text-center order-1 sm:order-2'>
-                  <div className='mx-auto max-w-[80px] '>
+                  <div className='mx-auto max-w-[130px] sm:max-w-[100px] '>
                     <QRCode
                       style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
                       value={qrValue}
