@@ -1,3 +1,4 @@
+import PublicHeader from '@/components/PublicHeader'
 import React, { ReactElement, useEffect, useState } from 'react'
 import Certificates from '../components/certificate/Certificates'
 
@@ -5,7 +6,7 @@ const isNumber = (value: string): boolean => {
   return /^\d+$/.test(value)
 }
 
-const MyCertificates = (): ReactElement => {
+const MyCertificatesView = (): ReactElement => {
   const [dni, setDni] = useState('')
   const [error, setError] = useState('')
 
@@ -35,11 +36,7 @@ const MyCertificates = (): ReactElement => {
 
   return (
     <>
-      <header className='bg-black shadow-lg py-3'>
-        <div className='container'>
-          <img className='max-w-[120px]' src="/logo-blanco.png" alt="" />
-        </div>
-      </header>
+      <PublicHeader />
       <div className='container'>
         <div className='mt-5'>
           <div className='mb-5'>
@@ -76,4 +73,4 @@ const MyCertificates = (): ReactElement => {
   )
 }
 
-export default MyCertificates
+export default MyCertificatesView

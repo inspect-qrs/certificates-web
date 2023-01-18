@@ -113,7 +113,7 @@ const Table = ({ columns, data, sortIcon, setSortColumn, onRowClick = (id) => { 
                           {...cell.getCellProps()}
                           key={index}
                           className={`${bodyStyle} ${selectedRows.includes(row.original.id) ? 'text-white' : 'text-gray-900'}`}
-                          onClick={() => { onRowClick(row.original.id) }}
+                          onClick={() => { onRowClick(row.original.certification) }}
                         >{cell.render('Cell')} { }</td>
                       ))}
 

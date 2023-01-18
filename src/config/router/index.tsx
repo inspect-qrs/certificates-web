@@ -3,10 +3,11 @@ import { createBrowserRouter, RouteObject } from 'react-router-dom'
 import Layout from '@/components/Layout'
 import NotFoundView from '@/pages/NotFoundView'
 import Dashboard from '@/pages/Dashboard'
-import CertificateDetail from '@/pages/CertificateDetail'
+import VerifyCertificateView from '@/pages/VerifyCertificateView'
 import LoginView from '@/pages/LoginView'
 import Home from '@/components/Home'
-import MyCertificates from '@/pages/MyCertificates'
+import MyCertificatesView from '@/pages/MyCertificatesView'
+import PrintCertificateView from '@/pages/PrintCertificateView'
 
 const AUTH_REQUIRED: RouteObject[] = [
   {
@@ -32,11 +33,15 @@ const router = createBrowserRouter([
   },
   {
     path: 'mis-certificados',
-    element: <MyCertificates />
+    element: <MyCertificatesView />
   },
   {
-    path: 'certificado',
-    element: <CertificateDetail />
+    path: 'verificar-certificado',
+    element: <VerifyCertificateView />
+  },
+  {
+    path: 'imprimir-certificado',
+    element: <PrintCertificateView />
   },
   {
     path: '*',

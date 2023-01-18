@@ -1,9 +1,9 @@
-import React, { ReactElement, useEffect, useState, useRef } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import CertificateToPdf from '@/components/public/CertificatePdf'
+import React, { ReactElement, useEffect, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useReactToPrint } from 'react-to-print'
 
-const CertificateDetail = (): ReactElement => {
+const PrintCertificateView = (): ReactElement => {
   const [searchParams] = useSearchParams()
   const [id, setId] = useState<string>('')
   const certificateRef = useRef< HTMLDivElement | null>(null)
@@ -33,4 +33,4 @@ const CertificateDetail = (): ReactElement => {
   )
 }
 
-export default CertificateDetail
+export default PrintCertificateView
