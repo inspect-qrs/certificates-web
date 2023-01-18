@@ -32,9 +32,10 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
   useEffect(() => {
     if (id === '') return
     void certificatesService.findOneById(id)
-      .then(setCertificate)
-
-    setQrValue(`${QR_BASE_URL}/verificar-certificado?cod=${certificate.certification}`)
+      .then(response => {
+        setCertificate(certificate)
+        setQrValue(`${QR_BASE_URL}/verificar-certificado?cod=${response.certification}`)
+      })
   }, [id])
 
   return (
