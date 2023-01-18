@@ -33,7 +33,7 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
     if (id === '') return
     void certificatesService.findOneById(id)
       .then(response => {
-        setCertificate(certificate)
+        setCertificate(response)
         setQrValue(`${QR_BASE_URL}/verificar-certificado?cod=${response.certification}`)
       })
   }, [id])
