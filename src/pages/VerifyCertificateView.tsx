@@ -1,7 +1,7 @@
 import { CertificatesService } from '@/api/certificates.service'
 import CertificateDetail from '@/components/public/CertificateDetail'
 import PublicHeader from '@/components/PublicHeader'
-import { Certificate } from '@/types/certificate.interface'
+import { Certificate, STATUS } from '@/types/certificate.interface'
 import React, { ReactElement, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
@@ -15,8 +15,10 @@ const INITIAL_VALUE = {
   company: '',
   modality: '',
   duration: '',
+  validity: 0,
   certification: '',
-  date: ''
+  date: '',
+  status: 'active' as STATUS
 }
 
 const VerifyCertificateView = (): ReactElement => {
@@ -42,6 +44,10 @@ const VerifyCertificateView = (): ReactElement => {
       })
   }
 
+  const handleSetCertificate = (certificate: Certificate): void => {
+    setCertificate(certificate)
+  }
+
   return (
     <>
       <PublicHeader />
@@ -57,7 +63,7 @@ const VerifyCertificateView = (): ReactElement => {
           </div>
           { error !== '' && (<p className='mt-2 w-full py-1 text-center bg-red text-white rounded-lg'>{error}</p>)}
           {
-            certificate !== INITIAL_VALUE && <CertificateDetail certificate={certificate} />
+            certificate !== INITIAL_VALUE && <CertificateDetail certificate={certificate} setCertificate={handleSetCertificate}/>
           }
         </div>
       </div>

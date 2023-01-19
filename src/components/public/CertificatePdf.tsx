@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from 'react'
 import { CertificatesService } from '@/api/certificates.service'
-import { Certificate } from '@/types/certificate.interface'
+import { Certificate, STATUS } from '@/types/certificate.interface'
 import QRCode from 'react-qr-code'
 
 const INITIAL_VALUE = {
@@ -13,18 +13,19 @@ const INITIAL_VALUE = {
   company: '',
   modality: '',
   duration: '',
+  validity: 0,
   certification: '',
-  date: ''
+  date: '',
+  status: 'active' as STATUS
 }
 
 interface CertificateToPdfProps {
   id: string
-  reference: React.MutableRefObject<HTMLDivElement | null>
 }
 
 const QR_BASE_URL: string = import.meta.env.VITE_QR_BASE_URL ?? ''
 
-const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElement => {
+const CertificateToPdf = ({ id }: CertificateToPdfProps): ReactElement => {
   const certificatesService = new CertificatesService()
   const [certificate, setCertificate] = useState<Certificate>(INITIAL_VALUE)
   const [qrValue, setQrValue] = useState<string>('')
@@ -39,7 +40,7 @@ const CertificateToPdf = ({ id, reference }: CertificateToPdfProps): ReactElemen
   }, [id])
 
   return (
-    <div className='min-h-screen h-full sm:h-screen p-3' ref={reference}>
+    <div className='min-h-screen h-full sm:h-screen p-3'>
       {certificate === INITIAL_VALUE
         ? (
           <div className='bg-white z-[100] absolute top-0 left-0 w-full h-full rounded-xl after:absolute after:w-10 after:h-10 after:top-0 after:right-0 after:left-0 after:bottom-0 after:m-auto after:border-8 after:border-t-black after:opacity-100 after:rounded-[50%] after:animate-spin'>

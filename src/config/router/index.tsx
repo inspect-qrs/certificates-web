@@ -8,6 +8,7 @@ import LoginView from '@/pages/LoginView'
 import Home from '@/components/Home'
 import MyCertificatesView from '@/pages/MyCertificatesView'
 import PrintCertificateView from '@/pages/PrintCertificateView'
+import PrintCertificatesView from '@/pages/PrintCertificatesView'
 
 const AUTH_REQUIRED: RouteObject[] = [
   {
@@ -18,6 +19,10 @@ const AUTH_REQUIRED: RouteObject[] = [
   {
     path: 'admin',
     element: <Dashboard />
+  },
+  {
+    path: 'imprimir-certificados',
+    element: <PrintCertificatesView />
   }
 ]
 

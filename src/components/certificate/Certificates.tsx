@@ -64,6 +64,11 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
     return sortDirection === 'asc' ? <SortIconAsc className={className} /> : <SortIconDesc className={className} />
   }
 
+  const getExpiredDate = (date: string, validity: number): Date => {
+    const dateObj = new Date(date)
+    dateObj.setMonth(dateObj.getMonth() + validity)
+    return dateObj
+  }
   const filteredData = useMemo(() => {
     let filtered = certificates
     if (filterText) {
@@ -73,13 +78,25 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
     }
     if (sortColumn) {
       filtered.sort((a, b) => {
-        if (a[sortColumn] < b[sortColumn]) {
-          return sortDirection === 'asc' ? -1 : 1
+        if (sortColumn === 'status') {
+          const auxA = new Date() > getExpiredDate(a.date, a.validity) ? 'Expirado' : 'Activo'
+          const auxB = new Date() > getExpiredDate(b.date, b.validity) ? 'Expirado' : 'Activo'
+          if (auxA < auxB) {
+            return sortDirection === 'asc' ? -1 : 1
+          }
+          if (auxA > auxB) {
+            return sortDirection === 'asc' ? 1 : -1
+          }
+          return 0
+        } else {
+          if (a[sortColumn] < b[sortColumn]) {
+            return sortDirection === 'asc' ? -1 : 1
+          }
+          if (a[sortColumn] > b[sortColumn]) {
+            return sortDirection === 'asc' ? 1 : -1
+          }
+          return 0
         }
-        if (a[sortColumn] > b[sortColumn]) {
-          return sortDirection === 'asc' ? 1 : -1
-        }
-        return 0
       })
     }
     return filtered
@@ -110,14 +127,27 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
   }
 
   const COLUMN_HEADERS: Array<Column<Certificate>> = [
+    { Header: 'Certificación', accessor: 'certification' },
     { Header: 'Nombre completo', accessor: 'fullName' },
     { Header: 'Dni', accessor: 'dni' },
     { Header: 'Curso', accessor: 'course' },
+    {
+      Header: 'Estado',
+      accessor: row => {
+        return new Date() > getExpiredDate(row.date, row.validity) ? 'Expirado' : 'Activo'
+      },
+      id: 'status'
+    },
     { Header: 'Nota', accessor: 'mark' },
+    { Header: 'Fecha', accessor: row => formatDate(row.date) },
+    {
+      Header: 'Vencimiento',
+      accessor: row => {
+        return formatDate(getExpiredDate(row.date, row.validity).toDateString())
+      }
+    },
     { Header: 'Compañia', accessor: 'company' },
-    { Header: 'Duración', accessor: 'duration' },
-    { Header: 'Certificación', accessor: 'certification' },
-    { Header: 'Fecha', accessor: row => formatDate(row.date) }
+    { Header: 'Duración', accessor: 'duration' }
   ]
 
   const filterMobile = (): ReactElement => (
@@ -172,7 +202,7 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
 
   return (
     <main className='mb-5'>
-      {isDeleteModalShowed && <DeleteModal close={closeDeleteModal} removeCertificates={handleRemovePeople}/>}
+      {isDeleteModalShowed && <DeleteModal close={closeDeleteModal} removeCertificates={handleRemovePeople} />}
       {isExcelModalShowed && <ImportExcel close={closeExcelModal} addCertificates={handleImportExcel} />}
       <div className='mb-4'>
         {isAboveSmallScreens ? filterDesktop() : filterMobile()}

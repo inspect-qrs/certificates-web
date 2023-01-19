@@ -23,7 +23,9 @@ const PrintCertificateView = (): ReactElement => {
           ? (
             <div className='mt-4'>
               <button className='ml-4 px-4 py-1 rounded-lg text-white bg-red' onClick={handlePrint}>Imprimir</button>
-              <CertificateToPdf id={id} reference={certificateRef}/>
+              <div ref={certificateRef}>
+                <CertificateToPdf id={id} />
+              </div>
             </div>
             )
           : (<p className='text-center text-3xl font-bold uppercase'>Hubo un error, intente mas tarde</p>)

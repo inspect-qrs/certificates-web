@@ -8,6 +8,10 @@ export interface Certificate {
   company: string
   modality: string
   duration: string
+  validity: number
   certification: string
   date: string
+  status: STATUS
 }
+
+export type STATUS = 'active' | 'expired'

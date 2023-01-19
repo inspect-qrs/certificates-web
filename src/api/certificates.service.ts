@@ -31,6 +31,11 @@ export class CertificatesService extends AppServices {
       .then(response => response.data)
   }
 
+  update = async (id: string, certificate: Omit<Certificate, 'id'>): Promise<Certificate> => {
+    return await this.put<Certificate>(`/${id}`, certificate)
+      .then(response => response.data)
+  }
+
   removeMultiple = async (ids: string[]): Promise<Certificate[]> => {
     return await this.patch<Certificate[]>('/remove-multiple', { ids })
       .then(response => response.data)

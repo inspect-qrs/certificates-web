@@ -52,6 +52,19 @@ export abstract class AppServices {
       })
   }
 
+  async put <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return await axios.put(this._fullUrl + url, data, config)
+      .then((response: AxiosResponse) => {
+        return response
+      })
+      .catch(async (error: AxiosError) => {
+        if (error.response?.status === StatusCodes.UNAUTHORIZED) {
+          console.log(error)
+        }
+        return await Promise.reject(error.response)
+      })
+  }
+
   async patch <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return await axios.patch(this._fullUrl + url, data, config)
       .then((response: AxiosResponse) => {

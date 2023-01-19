@@ -1,8 +1,10 @@
 import useMediaQuery from '@/hooks/UseMediaQuery'
 import React, { ReactElement, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import NavBar from './Navbar'
 
 const Header = (): ReactElement => {
+  const navigate = useNavigate()
   const [isMenuToggled, setIsMenuToggled] = useState(false)
 
   const isAboveSmallScreens = useMediaQuery('(min-width: 640px)')
@@ -41,7 +43,9 @@ const Header = (): ReactElement => {
   return (
     <header className='bg-black shadow-md shadow-black/10 py-4 mb-4'>
       <nav className='flex items-center justify-between mx-auto w-5/6'>
-        <div className='flex gap-4 items-center'>
+        <div className='flex gap-4 items-center cursor-pointer'
+          onClick={ () => { navigate('/admin') }}
+          >
           <img className='max-w-[150px] border-r-2 border-red' src="/logo-blanco.png" alt="" />
           <img className='max-w-[150px]' src="/brand.png" alt="" />
         </div>
