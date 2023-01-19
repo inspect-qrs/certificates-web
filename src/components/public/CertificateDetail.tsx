@@ -56,31 +56,31 @@ const CertificateDetail = ({ certificate, setCertificate }: CertificateDetailPro
   return (
     <div className='mt-5'>
       <p className={`${certificate.status === 'active' ? 'bg-success' : 'bg-red'} mb-4 rounded-lg text-white py-2 text-center uppercase font-bold`} >El certificado { certificate.status === 'active' ? 'es válido' : 'ha expirado'}</p>
-      <div className='p-3 shadow-card bg-gray-100 uppercase'>
+      <div className='p-3 shadow-card bg-gray-100'>
         <div className=''>
-          <div className='grid grid-cols-[1fr_2fr] gap-2 py-1 border-b border-gray-light'>
+          <div className='grid grid-cols-[1fr_2fr] py-1 border-b border-gray-light'>
             <p className='font-semibold'>Nombre</p>
-            <p className='uppercase'>{certificate.fullName.toLowerCase()}</p>
+            <p className='uppercase'>: {certificate.fullName.toLowerCase()}</p>
           </div>
-          <div className='grid grid-cols-[1fr_2fr] gap-2 py-1 border-b border-gray-light'>
+          <div className='grid grid-cols-[1fr_2fr] py-1 border-b border-gray-light'>
             <p className='font-semibold'>DNI</p>
-            <p className='uppercase'>{certificate.dni}</p>
+            <p className='uppercase'>: {certificate.dni}</p>
           </div>
-          <div className='grid grid-cols-[1fr_2fr] gap-2 py-1 border-b border-gray-light'>
+          <div className='grid grid-cols-[1fr_2fr] py-1 border-b border-gray-light'>
             <p className='font-semibold'>Certificado</p>
-            <p className='uppercase'>{certificate.course.toLowerCase()}</p>
+            <p className='uppercase'>: {certificate.course.toLowerCase()}</p>
           </div>
-          <div className='grid grid-cols-[1fr_2fr] gap-2 py-1 border-b border-gray-light'>
+          <div className='grid grid-cols-[1fr_2fr] py-1 border-b border-gray-light'>
             <p className='font-semibold'>Emitido el</p>
-            <p className='uppercase'>{formatDate(certificate.date)}</p>
+            <p className='uppercase'>: {formatDate(certificate.date)}</p>
           </div>
-          <div className='grid grid-cols-[1fr_2fr] gap-2 py-1 border-b border-gray-light'>
-            <p className='font-semibold'>Vence el </p>
-            <p className='uppercase'>{getExpiredDate()}</p>
+          <div className='grid grid-cols-[1fr_2fr] py-1 border-b border-gray-light'>
+            <p className='font-semibold'>Vence el</p>
+            <p className='uppercase'>: {getExpiredDate()}</p>
           </div>
           <div className='grid grid-cols-[1fr_2fr] py-1'>
             <p className='font-semibold'>Estado</p>
-            <p className='uppercase'>{getStatus(certificate.status)}</p>
+            <p className='uppercase'>: {getStatus(certificate.status)}</p>
           </div>
         </div>
         <button
