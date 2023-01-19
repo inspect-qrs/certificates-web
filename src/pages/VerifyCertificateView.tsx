@@ -58,8 +58,8 @@ const VerifyCertificateView = (): ReactElement => {
               className='block w-full h-10 px-2 border-b border-solid border-black outline-none mb-2 rounded-t-sm  disabled:bg-gray-100'
               type="text" value={cod} disabled />
             <button
-              className='bg-black text-white px-12 py-2 rounded-lg text-lg'
-              onClick={handleVerifyOnClick}>Verify</button>
+              className='bg-black text-white px-12 py-2 rounded-lg text-lg uppercase'
+              onClick={handleVerifyOnClick}>Verificar</button>
           </div>
           { error !== '' && (<p className='mt-2 w-full py-1 text-center bg-red text-white rounded-lg'>{error}</p>)}
           {

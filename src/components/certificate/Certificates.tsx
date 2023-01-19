@@ -118,8 +118,8 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
     setCertificates(certificates.filter(certificate => !certificatesToRemoveIds.includes(certificate.certification)))
   }
 
-  const handleRowClick = (cod: string): void => {
-    navigate(`/verificar-certificado?cod=${cod}`)
+  const handleRowClick = (id: string): void => {
+    navigate(`/imprimir-certificado?id=${id}`)
   }
 
   const formatDate = (date: string): string => {
