@@ -33,6 +33,8 @@ export abstract class AppServices {
       })
       .catch(async (error: AxiosError) => {
         if (error.response?.status === StatusCodes.UNAUTHORIZED) {
+          localStorage.removeItem('auth')
+          location.reload()
           console.log(error)
         }
         return await Promise.reject(error.response)
@@ -46,7 +48,8 @@ export abstract class AppServices {
       })
       .catch(async (error: AxiosError) => {
         if (error.response?.status === StatusCodes.UNAUTHORIZED) {
-          console.log(error)
+          localStorage.removeItem('auth')
+          location.reload()
         }
         return await Promise.reject(error.response)
       })
@@ -59,7 +62,8 @@ export abstract class AppServices {
       })
       .catch(async (error: AxiosError) => {
         if (error.response?.status === StatusCodes.UNAUTHORIZED) {
-          console.log(error)
+          localStorage.removeItem('auth')
+          location.reload()
         }
         return await Promise.reject(error.response)
       })
@@ -72,7 +76,8 @@ export abstract class AppServices {
       })
       .catch(async (error: AxiosError) => {
         if (error.response?.status === StatusCodes.UNAUTHORIZED) {
-          console.log(error)
+          localStorage.removeItem('auth')
+          location.reload()
         }
         return await Promise.reject(error.response)
       })
@@ -85,7 +90,8 @@ export abstract class AppServices {
       })
       .catch(async (error: AxiosError) => {
         if (error.response?.status === StatusCodes.UNAUTHORIZED) {
-          console.log(error)
+          localStorage.removeItem('auth')
+          location.reload()
         }
         return await Promise.reject(error.response)
       })
