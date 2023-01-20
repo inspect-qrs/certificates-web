@@ -54,14 +54,14 @@ const CertificateToPdf = ({ id }: CertificateToPdfProps): ReactElement => {
             </div>
             <div className='flex flex-col items-center justify-center h-[75%] text-xl'>
               <h1 className='font-bold uppercase text-5xl'>Certificado</h1>
-              <p className='text-center text-2xl'>Otorgado a:</p>
+              <p className='text-center text-2xl mt-3'>Otorgado a:</p>
               <p className='text-center font-bold uppercase text-3xl'>{certificate.fullName}</p>
               <p className='text-center italic'>Por haber { certificate.mark > 13 ? 'aprobado satisfactoriamente' : 'participado en'} el curso de:</p>
-              <p className='text-center font-bold uppercase text-2xl'>{certificate.course}</p>
+              <p className='text-center font-bold uppercase text-2xl mt-3'>{certificate.course}</p>
               <p className='text-center font-bold'>( <span className='font-bold'>{certificate.modality}</span> )</p>
               <p className='text-center font-bold'>Duración: {certificate.duration} horas</p>
-              <p className='text-center italic text-lg'>Brindado a la empresa {certificate.company.toUpperCase()}</p>
-              <p className='text-center italic text-lg'>el <span className='capitalize'>{new Date(certificate.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: '2-digit' })}</span></p>
+              <p className='text-center italic text-lg mt-3'>Brindado a la empresa {certificate.company.toUpperCase()}</p>
+              <p className='text-center italic text-lg'>el <span className=''>{new Date(certificate.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: '2-digit' })}</span></p>
               <div className='flex flex-col justify-center items-center mt-3'>
                 <img src="/firma.png" alt="" className='h-[95px]' />
                 <div className='text-sm border-t border-black px-6 -mt-6'>
