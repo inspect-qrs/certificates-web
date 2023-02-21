@@ -8,6 +8,8 @@ import useMediaQuery from '@/hooks/UseMediaQuery'
 import { Column } from 'react-table'
 import Table from '../Table'
 import DeleteModal from './DeleteModal'
+import { useAuthStore } from '@/config/store/auth'
+import { User } from '@/types/user.interface'
 
 interface CertificatesProps {
   dni?: string
@@ -35,6 +37,13 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
   const [filterColumn, setFilterColumn] = useState<keyof Certificate>('dni')
   const [filterText, setFilterText] = useState('')
+
+  const userAuth = useAuthStore<User>((state) => state.user)
+  const [isAdmin, setIsAdmin] = useState<boolean>(false)
+
+  useEffect(() => {
+    setIsAdmin(userAuth.role === 'admin')
+  }, [userAuth])
 
   const navigate = useNavigate()
 
@@ -208,7 +217,7 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
         {isAboveSmallScreens ? filterDesktop() : filterMobile()}
       </div>
 
-      <Table columns={COLUMN_HEADERS} data={filteredData} sortIcon={getSortIcon} setSortColumn={handleSortColumn} onRowClick={handleRowClick} />
+      <Table columns={COLUMN_HEADERS} data={filteredData} sortIcon={getSortIcon} setSortColumn={handleSortColumn} onRowClick={ isAdmin ? handleRowClick : () => {}} />
     </main >
   )
 }
