@@ -14,7 +14,7 @@ interface Link {
 }
 
 const links: Link[] = [
-  { name: 'Admin', to: '/admin' }
+  // { name: 'Admin', to: '/admin' }
 ]
 
 const NavBar = ({ linkClassNames, className, handleClick }: NavBarProps): ReactElement => {
