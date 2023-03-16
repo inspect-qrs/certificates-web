@@ -61,7 +61,7 @@ const CertificateToPdf = ({ id }: CertificateToPdfProps): ReactElement => {
               <p className='text-center font-bold'>( <span className='font-bold'>{certificate.modality}</span> )</p>
               <p className='text-center font-bold'>Duración: {certificate.duration} horas</p>
               <p className='text-center italic text-lg mt-3'>Brindado a la empresa {certificate.company.toUpperCase()}</p>
-              <p className='text-center italic text-lg'>el <span className=''>{new Date(certificate.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: '2-digit' })}</span></p>
+              <p className='text-center italic text-lg'>el <span className=''>{certificate.date}</span></p>
               <div className='flex flex-col justify-center items-center mt-3'>
                 <img src="/firma.png" alt="" className='h-[95px]' />
                 <div className='text-sm border-t border-black px-6 -mt-6'>

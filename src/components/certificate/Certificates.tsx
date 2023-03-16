@@ -148,11 +148,13 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
       id: 'status'
     },
     { Header: 'Nota', accessor: 'mark' },
-    { Header: 'Fecha', accessor: row => formatDate(row.date) },
+    { Header: 'Fecha', accessor: row => row.date },
     {
       Header: 'Vencimiento',
       accessor: row => {
-        return formatDate(getExpiredDate(row.date, row.validity).toDateString())
+        const dates = row.date.split(',')
+        const lastDate = dates[dates.length - 1].trim().split('/').reverse().join('/')
+        return formatDate(getExpiredDate(lastDate, row.validity).toDateString())
       }
     },
     { Header: 'Compañia', accessor: 'company' },
