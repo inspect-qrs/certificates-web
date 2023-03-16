@@ -72,7 +72,7 @@ const CertificateDetail = ({ certificate, setCertificate }: CertificateDetailPro
           </div>
           <div className='grid grid-cols-[1fr_2fr] py-1 border-b border-gray-light'>
             <p className='font-semibold'>Emitido el</p>
-            <p className='uppercase'>: {formatDate(certificate.date)}</p>
+            <p className='uppercase'>: {certificate.date}</p>
           </div>
           <div className='grid grid-cols-[1fr_2fr] py-1 border-b border-gray-light'>
             <p className='font-semibold'>Vence el</p>
