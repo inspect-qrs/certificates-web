@@ -16,8 +16,10 @@ export class AuthService extends AppServices {
   }
 
   login = async (data: UserData): Promise<LoginData> => {
+    console.log(data)
     return await this.post<LoginData>('/login', data)
       .then(response => {
+        console.log(response)
         const { token, user } = response.data
         return {
           token,
