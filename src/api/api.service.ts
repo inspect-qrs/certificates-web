@@ -40,6 +40,7 @@ export abstract class AppServices {
   }
 
   async post <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    console.log(this._fullUrl + url)
     return await axios.post(this._fullUrl + url, data, config)
       .then((response: AxiosResponse) => {
         return response
