@@ -148,7 +148,8 @@ const Certificates = ({ dni = '', isExcelModalShowed = false, closeExcelModal = 
       id: 'status'
     },
     { Header: 'Nota', accessor: 'mark' },
-    { Header: 'Fecha', accessor: row => row.date },
+    { Header: 'Cantidad de fechas', accessor: row => row.date.split(',').length },
+    { Header: 'Última Fecha', accessor: row => row.date.split(',')[0].split('/').reverse().join('/') },
     {
       Header: 'Vencimiento',
       accessor: row => {

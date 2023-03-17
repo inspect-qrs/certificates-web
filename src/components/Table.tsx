@@ -49,7 +49,7 @@ const Table = ({ columns, data, sortIcon, setSortColumn, onRowClick = (id) => { 
   }
 
   const headStyle = 'text-sm font-medium text-white px-6 py-4 capitalize cursor-pointer'
-  const bodyStyle = 'text-sm font-light px-6 py-4 whitespace-nowrap uppercase cursor-pointer'
+  const bodyStyle = 'text-sm font-light px-6 py-4 whitespace-nowrap uppercase cursor-pointer text-center'
 
   const PAGINATION_BUTTONS: PaginationButton[] = [
     {
@@ -82,8 +82,8 @@ const Table = ({ columns, data, sortIcon, setSortColumn, onRowClick = (id) => { 
           pageOptions={{ pageIndex, pageSize, length: pageOptions.length, setPageSize: handleSetPageSize }} />
       </div>
 
-      <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
-        <div className='inline-block min-w-full sm:px-6 lg:px-8'>
+      <div className='overflow-x-auto'>
+        <div className='inline-block min-w-full'>
           <div className='overflow-hidden'>
             <table {...getTableProps()} className='min-w-full'>
               <thead className='border-b bg-black'>
