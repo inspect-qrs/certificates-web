@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useAuthStore } from '@/config/store/auth'
 import React, { ReactElement } from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
@@ -8,9 +9,7 @@ const Layout = (): ReactElement => {
   return (
     <>
       {
-        isAuth
-          ? <Outlet />
-          : <Navigate to='/login' state={{ from: location }} replace />
+        <Navigate to='/login' state={{ from: location }} replace />
       }
     </>
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { createBrowserRouter, RouteObject } from 'react-router-dom'
 import Layout from '@/components/Layout'
@@ -36,18 +37,18 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: AUTH_REQUIRED
   },
-  {
-    path: 'mis-certificados',
-    element: <MyCertificatesView />
-  },
-  {
-    path: 'verificar-certificado',
-    element: <VerifyCertificateView />
-  },
-  {
-    path: 'imprimir-certificado',
-    element: <PrintCertificateView />
-  },
+  // {
+  //   path: 'mis-certificados',
+  //   element: <MyCertificatesView />
+  // },
+  // {
+  //   path: 'verificar-certificado',
+  //   element: <VerifyCertificateView />
+  // },
+  // {
+  //   path: 'imprimir-certificado',
+  //   element: <PrintCertificateView />
+  // },
   {
     path: '*',
     element: <NotFoundView />

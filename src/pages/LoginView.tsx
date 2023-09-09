@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { AuthService } from '@/api/auth.service'
 import { useAuthStore } from '@/config/store/auth'
 import React, { ReactElement, useState, useEffect } from 'react'
@@ -31,16 +32,17 @@ const LoginView = (): ReactElement => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    void authService.login(data)
-      .then(response => {
-        setToken(response.token)
-        setUser(response.user)
-        navigate('/admin')
-      })
-      .catch(error => {
-        const { message } = error.data
-        setError(message)
-      })
+    setError('Las credenciales no coinciden')
+    // void authService.login(data)
+    //   .then(response => {
+    //     setToken(response.token)
+    //     setUser(response.user)
+    //     navigate('/admin')
+    //   })
+    //   .catch(error => {
+    //     const { message } = error.data
+    //     setError(message)
+    //   })
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
