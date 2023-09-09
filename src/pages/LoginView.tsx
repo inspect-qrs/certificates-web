@@ -26,9 +26,9 @@ const LoginView = (): ReactElement => {
   const [error, setError] = useState<string>('')
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (isAuth) navigate('/admin')
-  }, [])
+  // useEffect(() => {
+  //   if (isAuth) navigate('/admin')
+  // }, [])
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
