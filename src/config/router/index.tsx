@@ -37,18 +37,18 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: AUTH_REQUIRED
   },
-  // {
-  //   path: 'mis-certificados',
-  //   element: <MyCertificatesView />
-  // },
-  // {
-  //   path: 'verificar-certificado',
-  //   element: <VerifyCertificateView />
-  // },
-  // {
-  //   path: 'imprimir-certificado',
-  //   element: <PrintCertificateView />
-  // },
+  {
+    path: 'mis-certificados',
+    element: <MyCertificatesView />
+  },
+  {
+    path: 'verificar-certificado',
+    element: <VerifyCertificateView />
+  },
+  {
+    path: 'imprimir-certificado',
+    element: <PrintCertificateView />
+  },
   {
     path: '*',
     element: <NotFoundView />

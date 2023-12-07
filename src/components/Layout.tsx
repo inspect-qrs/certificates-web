@@ -9,7 +9,9 @@ const Layout = (): ReactElement => {
   return (
     <>
       {
-        <Navigate to='/login' state={{ from: location }} replace />
+        isAuth
+          ? <Outlet />
+          : <Navigate to='/login' state={{ from: location }} replace />
       }
     </>
 

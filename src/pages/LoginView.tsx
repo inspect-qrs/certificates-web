@@ -26,23 +26,23 @@ const LoginView = (): ReactElement => {
   const [error, setError] = useState<string>('')
   const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   if (isAuth) navigate('/admin')
-  // }, [])
+  useEffect(() => {
+    if (isAuth) navigate('/admin')
+  }, [])
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
     setError('Las credenciales no coinciden')
-    // void authService.login(data)
-    //   .then(response => {
-    //     setToken(response.token)
-    //     setUser(response.user)
-    //     navigate('/admin')
-    //   })
-    //   .catch(error => {
-    //     const { message } = error.data
-    //     setError(message)
-    //   })
+    void authService.login(data)
+      .then(response => {
+        setToken(response.token)
+        setUser(response.user)
+        navigate('/admin')
+      })
+      .catch(error => {
+        const { message } = error.data
+        setError(message)
+      })
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
