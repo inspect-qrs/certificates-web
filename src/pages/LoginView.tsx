@@ -32,7 +32,7 @@ const LoginView = (): ReactElement => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    setError('Las credenciales no coinciden')
+
     void authService.login(data)
       .then(response => {
         setToken(response.token)
