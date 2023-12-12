@@ -2,6 +2,15 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
+import dotenv from 'dotenv'
+
+if (process.env.NODE_ENV === 'development') {
+  dotenv.config({ path: '.env.development' });
+} else {
+  dotenv.config({ path: '.env.production' });
+}
+
+const PORT = process.env.VITE_PORT ?? 3500;
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,6 +21,6 @@ export default defineConfig({
     ],
   },
   server: {
-    port: 4500
+    port: +PORT
   }
 })
